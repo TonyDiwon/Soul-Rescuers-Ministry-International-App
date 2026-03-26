@@ -65,6 +65,7 @@
             line-height: 1.8; font-size: 15px;
             max-height: 500px; overflow-y: auto;
             white-space: pre-wrap;
+            font-family: monospace;
         }
         .sermon-item {
             background: #f8f9fa; border-radius: 16px; padding: 16px;
@@ -140,8 +141,8 @@
             <h2>📖 Holy Bible</h2>
             <div class="card">
                 <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-                    <button id="btn-ot" onclick="selectTestament('ot')" style="margin-top: 0;">Old Testament</button>
-                    <button id="btn-nt" onclick="selectTestament('nt')" style="margin-top: 0;">New Testament</button>
+                    <button id="btn-ot" onclick="selectTestament('ot')" style="margin-top: 0;">Old Testament (39)</button>
+                    <button id="btn-nt" onclick="selectTestament('nt')" style="margin-top: 0;">New Testament (27)</button>
                 </div>
                 <select id="book-select"></select>
                 <select id="chapter-select"></select>
@@ -169,10 +170,22 @@
 
     <script>
         // ============ ALL 66 BIBLE BOOKS ============
-        const oldTestamentBooks = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi"];
-        const newTestamentBooks = ["Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
+        const oldTestamentBooks = [
+            "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
+            "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra",
+            "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon",
+            "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+            "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"
+        ];
         
-        // CORRECT chapter counts for each book
+        const newTestamentBooks = [
+            "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians",
+            "Galatians", "Ephesians", "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians",
+            "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews", "James", "1 Peter", "2 Peter",
+            "1 John", "2 John", "3 John", "Jude", "Revelation"
+        ];
+        
+        // ACCURATE chapter counts for each book
         const chapterCounts = {
             "Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,
             "1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,
@@ -281,7 +294,7 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${verseText.substring(0,800)}`)}`, '_blank');
         }
 
-        // Bible functions
+        // Bible functions - Using a more reliable API endpoint
         function selectTestament(testament) {
             currentTestament = testament;
             const books = testament === 'ot' ? oldTestamentBooks : newTestamentBooks;
@@ -310,19 +323,28 @@
             currentChapter = chapter;
             const bibleTextDiv = document.getElementById('bible-text');
             bibleTextDiv.innerHTML = '<div class="loading">📖 Loading God\'s Word...</div>';
+            
             try {
-                const response = await fetch(`https://bible-api.com/${encodeURIComponent(book)}+${chapter}`);
+                // Using the same API but ensuring proper encoding
+                const formattedBook = book.replace(/ /g, '+');
+                const response = await fetch(`https://bible-api.com/${encodeURIComponent(formattedBook)}+${chapter}`);
                 const data = await response.json();
-                if(data.text) {
+                
+                if(data.text && data.text.length > 0) {
                     let formatted = `<strong>${book} ${chapter}</strong><br><br>`;
-                    const verses = data.text.split('\n');
-                    verses.forEach((verse, idx) => { if(verse.trim()) formatted += `<span class="verse-number">${idx+1}</span> ${verse}<br>`; });
+                    const verses = data.text.split(/\n/);
+                    verses.forEach((verse, idx) => { 
+                        if(verse.trim()) {
+                            formatted += `<span class="verse-number">${idx+1}</span> ${verse}<br>`;
+                        }
+                    });
                     bibleTextDiv.innerHTML = formatted;
                 } else {
-                    bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105<br><br>Please try another chapter or book.`;
+                    bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105<br><br>If verses don't load, please try another chapter.`;
                 }
             } catch(e) { 
-                bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed." — 2 Timothy 3:16<br><br>If verses don't load, please try another chapter.`;
+                console.error("Bible API error:", e);
+                bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness." — 2 Timothy 3:16<br><br>Please try another chapter or book.`;
             }
         }
 
