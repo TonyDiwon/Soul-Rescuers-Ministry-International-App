@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Soul Rescuers Ministry | Complete Bible + Detailed Devotionals</title>
+    <title>Soul Rescuers Ministry | Complete Bible + Deep Devotionals</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -19,7 +19,7 @@
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .app-header img { height: 60px; width: auto; margin-bottom: 8px; }
+        .app-header img { height: 55px; width: auto; margin-bottom: 8px; }
         .app-header p { font-size: 12px; opacity: 0.9; }
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
@@ -57,6 +57,7 @@
         select, textarea {
             width: 100%; padding: 14px; border: 1px solid #e2e8f0;
             border-radius: 30px; font-size: 16px; margin-bottom: 12px;
+            background: white;
         }
         .bible-text {
             background: #f8f9fa; padding: 16px; border-radius: 12px;
@@ -82,19 +83,19 @@
         }
         .share-icons { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
         .share-icon {
-            flex: 1; padding: 8px; border-radius: 30px; text-align: center;
+            flex: 1; padding: 10px; border-radius: 30px; text-align: center;
             cursor: pointer; font-size: 14px; font-weight: bold;
         }
         .share-wa { background: #25D366; color: white; }
         .loading { text-align: center; padding: 40px; color: #6c757d; }
         audio { width: 100%; margin-top: 12px; }
         .verse-number { color: #D2691E; font-weight: bold; margin-right: 8px; }
-        .reflection-box { background: #fff0e6; padding: 16px; border-radius: 12px; margin-top: 16px; }
+        .reflection-box { background: #fff0e6; padding: 20px; border-radius: 12px; margin-top: 16px; }
     </style>
 </head>
 <body>
     <div class="app-header">
-        <img src="Weixin_Image_20260326124503_1041_69-removebg-preview.png" alt="Soul Rescuers Ministry" style="height: 60px; width: auto; margin-bottom: 8px;">
+        <img src="Weixin_Image_20260326124503_1041_69-removebg-preview.png" alt="Soul Rescuers Ministry" style="height: 55px; width: auto; margin-bottom: 8px;">
         <p>Faith Forward • Daily Devotion & Bible Study</p>
     </div>
 
@@ -103,12 +104,12 @@
         <div id="foryou-page" class="page active-page">
             <div class="ai-input-section">
                 <h3>✨ What's on your mind?</h3>
-                <p style="color: #6c757d; font-size: 14px;">Receive a detailed, scripture-based devotional</p>
-                <textarea id="user-question" rows="3" placeholder="Type what you want to study... e.g., 'What does the Bible say about faith?' or 'Teach me about forgiveness'"></textarea>
-                <button id="get-devotional-btn">📖 Get Detailed Devotional</button>
+                <p style="color: #6c757d; font-size: 14px;">Get a deep, scripture-based devotional</p>
+                <textarea id="user-question" rows="3" placeholder="e.g., 'What does the Bible say about faith?' or 'Teach me about God's love'"></textarea>
+                <button id="get-devotional-btn">📖 Get Devotional</button>
             </div>
             <div id="ai-response" class="card" style="display: none;">
-                <h3>📖 Your Personalized Devotional</h3>
+                <h3>📖 Your Devotional</h3>
                 <div id="ai-response-content"></div>
                 <div class="share-icons" id="share-buttons" style="display: none;">
                     <div class="share-icon share-wa" onclick="shareDevotional()">📱 Share via WhatsApp</div>
@@ -124,7 +125,7 @@
         <div id="devotional-page" class="page">
             <div id="daily-devotional-content"></div>
             <div class="share-icons" style="margin-top: 10px;">
-                <div class="share-icon share-wa" onclick="shareDailyDevotional()">📱 Share Today's Devotional</div>
+                <div class="share-icon share-wa" onclick="shareDailyDevotional()">📱 Share This Devotional</div>
             </div>
             <div style="display: flex; gap: 12px; margin-top: 16px;">
                 <button id="prev-devotional" style="background: #e9ecef; color: #2c3e50;">← Previous</button>
@@ -134,7 +135,7 @@
 
         <!-- Bible Page -->
         <div id="bible-page" class="page">
-            <h2>📖 Complete Holy Bible</h2>
+            <h2>📖 Holy Bible</h2>
             <div class="card">
                 <div style="display: flex; gap: 12px; margin-bottom: 16px;">
                     <button id="btn-ot" onclick="selectTestament('ot')" style="margin-top: 0;">Old Testament</button>
@@ -165,10 +166,11 @@
     </div>
 
     <script>
-        // ============ COMPLETE BIBLE BOOKS ============
+        // ============ ALL 66 BIBLE BOOKS ============
         const oldTestamentBooks = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi"];
         const newTestamentBooks = ["Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
         
+        // CORRECT chapter counts for each book
         const chapterCounts = {
             "Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,
             "1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,
@@ -181,26 +183,51 @@
             "1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22
         };
 
-        // ============ DETAILED DEVOTIONALS ============
+        // ============ DEEP, DETAILED DEVOTIONALS ============
         const devotionals = [
-            {title:"Walking in Faith: Trusting God's Path", verse:"Hebrews 11:1", verse_text:"Now faith is confidence in what we hope for and assurance about what we do not see.", explanation:"Faith is not about having all the answers—it's about trusting the One who does. When we walk by faith, we step into the unknown with confidence because we know God is leading. Abraham left his homeland without knowing where he was going. Moses led Israel through the Red Sea without seeing the path. Peter walked on water—until he looked at the waves. Faith is not the absence of fear; it is choosing to trust God despite the fear.", reflection:"What area of your life requires you to trust God more? What would change if you fully trusted Him with that situation?", prayer:"Heavenly Father, increase my faith. Help me trust You even when I cannot see the outcome. When I am afraid, help me to fix my eyes on Jesus, the author and perfecter of my faith. Give me courage to step forward in obedience. In Jesus' name, Amen."},
-            {title:"The Peace of God: Beyond Understanding", verse:"John 14:27", verse_text:"Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.", explanation:"The peace Jesus offers is radically different from what the world provides. Worldly peace depends on circumstances—when life is good, we feel peace. But God's peace remains steady even in chaos. It is not the absence of storms, but the presence of Christ in the midst of them. This peace guards our hearts and minds, standing as a sentinel against anxiety and fear. It is a peace that surpasses human understanding—meaning we don't have to understand everything to experience it.", reflection:"What is troubling your heart today? How would your life change if you truly received God's peace in this area?", prayer:"Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. When my heart is troubled, remind me that You are with me. When I am afraid, help me remember that You have overcome the world. Let Your peace rule in my heart. Amen."},
-            {title:"Love One Another: The Greatest Commandment", verse:"1 John 4:7-8", verse_text:"Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God. Whoever does not love does not know God, because God is love.", explanation:"Love is not just a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned. This is the love that God showed us through Jesus Christ.", reflection:"Who in your life needs to experience God's love through you today? What is one practical way you can show them this love?", prayer:"Father, You are love. Fill me with Your love so that I can love others as You have loved me. Help me to be patient when I want to be impatient. Help me to be kind when I want to be critical. Let Your love flow through me to those around me. Amen."}
+            {
+                title: "Walking by Faith, Not by Sight",
+                verse: "2 Corinthians 5:7",
+                verse_text: "For we live by faith, not by sight.",
+                explanation: "Faith is the foundation of our relationship with God. It's not about having all the answers—it's about trusting the One who does. Abraham left his homeland without knowing where he was going. Moses led Israel through the Red Sea without seeing the path. Peter walked on water until he looked at the waves. Faith is not the absence of fear; it's choosing to trust God despite the fear. Hebrews 11 tells us that faith is what pleases God. Without faith, it's impossible to please Him. When we walk by faith, we acknowledge that God's ways are higher than our ways, and His thoughts higher than our thoughts (Isaiah 55:9).",
+                reflection: "What area of your life are you trying to control instead of trusting God? What would change if you surrendered that area to Him today?",
+                prayer: "Heavenly Father, increase my faith. Help me to trust You even when I cannot see the outcome. When fear rises in my heart, remind me that You are with me. Give me courage to take the next step of obedience, knowing that You are faithful. In Jesus' name, Amen."
+            },
+            {
+                title: "The Peace That Surpasses Understanding",
+                verse: "Philippians 4:6-7",
+                verse_text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+                explanation: "Anxiety is a common struggle, but God offers us something better—His peace. This peace is not dependent on our circumstances. It's not the absence of storms, but the presence of Christ in the midst of them. When we bring our worries to God in prayer, something supernatural happens. His peace acts as a guard around our hearts and minds, protecting us from being overwhelmed. This peace surpasses human understanding—meaning we don't have to understand everything to experience it. Even when we can't see the way out, God's peace can fill our hearts.",
+                reflection: "What is causing you anxiety today? Have you brought it to God in prayer? What would it look like to release that burden to Him?",
+                prayer: "Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. When my heart is troubled, remind me that You are with me. Help me to bring every worry to You in prayer, trusting that You care for me. Let Your peace guard my heart and mind today. Amen."
+            },
+            {
+                title: "Love: The Greatest Commandment",
+                verse: "1 John 4:7-12",
+                verse_text: "Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God. Whoever does not love does not know God, because God is love.",
+                explanation: "Love is not just a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned. This is the love that God showed us through Jesus Christ, who died for us while we were still sinners. The Bible tells us that we love because He first loved us. Our love for others is a response to the love we have received from God.",
+                reflection: "Who in your life is difficult to love? How can you show them God's love today in a practical way?",
+                prayer: "Father, You are love. Fill me with Your love so that I can love others as You have loved me. Help me to be patient when I want to be impatient. Help me to be kind when I want to be critical. Let Your love flow through me to those around me. In Jesus' name, Amen."
+            }
         ];
+        
         let devotionalIndex = 0;
         let currentTestament = 'ot';
         let currentBook = '';
+        let currentChapter = 1;
         let history = [];
         let currentDevotionalText = '';
 
+        // History functions
         function loadHistory() { const saved = localStorage.getItem('devotional_history'); if(saved){ history = JSON.parse(saved); displayHistory(); } }
         function saveHistory() { localStorage.setItem('devotional_history', JSON.stringify(history.slice(-10))); }
         function displayHistory() {
             const historyDiv = document.getElementById('history-list');
             if(history.length===0){ historyDiv.innerHTML='<p style="color: #6c757d; text-align: center;">Your devotional history will appear here</p>'; return; }
-            historyDiv.innerHTML = history.map(item => `<div class="history-item"><strong>❓ ${item.question}</strong><br><small>📖 ${item.answer.substring(0,120)}...</small></div>`).join('');
+            historyDiv.innerHTML = history.map(item => `<div class="history-item"><strong>❓ ${item.question}</strong><br><small>📖 ${item.answer.substring(0,100)}...</small></div>`).join('');
         }
 
+        // AI Devotional Generator
         function generateDevotional() {
             const question = document.getElementById('user-question').value.trim();
             if(!question){ alert('Please enter what you want to study.'); return; }
@@ -208,43 +235,51 @@
             const responseContent = document.getElementById('ai-response-content');
             const shareButtons = document.getElementById('share-buttons');
             responseDiv.style.display = 'block';
-            responseContent.innerHTML = '<div class="loading">✨ Praying and preparing your detailed devotional...</div>';
+            responseContent.innerHTML = '<div class="loading">✨ Praying and preparing your devotional...</div>';
             shareButtons.style.display = 'none';
             
             setTimeout(() => {
-                const detailedAnswers = {
-                    faith: "📖 FAITH: A Deep Understanding\n\nFaith is more than belief—it's active trust. Hebrews 11 is often called the 'Hall of Faith.' It shows us that faith is what pleases God. Without faith, it's impossible to please Him. Faith is what moved Noah to build an ark before the flood. It's what compelled Abraham to leave his homeland and later to offer Isaac. It's what enabled Moses to choose suffering with God's people over the treasures of Egypt.\n\nScripture says: 'Faith is the substance of things hoped for, the evidence of things not seen.' (Hebrews 11:1 KJV).\n\nPractical Application: Today, identify one area where you're struggling to trust God. Write it down. Pray over it. Take one step of faith—even if it's a small step—and watch God work.",
-                    forgiveness: "📖 FORGIVENESS: Letting Go as God Let Go\n\nForgiveness is not about pretending the hurt didn't happen. It's about releasing the debt you feel others owe you. Jesus taught us to pray, 'Forgive us our debts, as we also have forgiven our debtors.' (Matthew 6:12). The word 'as' is powerful—we forgive because we have been forgiven.\n\nColossians 3:13 says: 'Forgive as the Lord forgave you.' How did the Lord forgive you? Completely. Freely. Without holding a grudge. Without keeping a record of wrongs.\n\nPractical Application: Is there someone you need to forgive today? Write their name down. Pray for them. Release them to God. Forgiveness is a process—give yourself grace as you walk through it.",
-                    love: "📖 LOVE: The Greatest of All\n\nLove is the supreme virtue. Paul writes in 1 Corinthians 13 that without love, our words are noise, our knowledge is empty, and our sacrifices are meaningless. Love is patient and kind. It does not envy or boast. It is not proud or rude. It keeps no record of wrongs.\n\n1 John 4:19 says: 'We love because He first loved us.' God's love is the source of all true love. We don't manufacture love; we receive it and then pour it out.\n\nPractical Application: Today, look for three opportunities to show love: a kind word, a helpful act, a patient response. Let God's love flow through you."
-                };
+                let answer = '';
+                const q = question.toLowerCase();
                 
-                let answer = "📖 A Message for You:\n\nTrust in the Lord with all your heart and lean not on your own understanding. In all your ways acknowledge Him, and He will make your paths straight. (Proverbs 3:5-6)\n\nTake time to meditate on God's Word today. Let His truth guide your steps. He is faithful, and He will lead you.\n\nPractical Application: Spend 10 minutes in quiet prayer today. Ask God to speak to your heart through His Word.";
-                const lowerQuestion = question.toLowerCase();
-                for(const [key,value] of Object.entries(detailedAnswers)) {
-                    if(lowerQuestion.includes(key)) { answer = value; break; }
+                if(q.includes('faith')) {
+                    answer = `📖 FAITH: Trusting God When You Can't See\n\n"Now faith is confidence in what we hope for and assurance about what we do not see." — Hebrews 11:1\n\nFaith is not about having all the answers—it's about trusting the One who does. Think of Abraham: God called him to leave his homeland, and he went, "even though he did not know where he was going" (Hebrews 11:8). Think of Moses: he led Israel through the Red Sea without seeing the path. Think of Peter: he walked on water until he looked at the waves.\n\nFaith is not the absence of fear; it's choosing to trust God despite the fear. Faith is what pleases God. Without faith, it's impossible to please Him (Hebrews 11:6).\n\n💭 Reflection: What area of your life are you trying to control instead of trusting God? What would change if you surrendered that area to Him today?\n\n🙏 Prayer: Lord, increase my faith. Help me to trust You even when I cannot see the outcome. Give me courage to take the next step of obedience, knowing that You are faithful. Amen.`;
+                }
+                else if(q.includes('peace') || q.includes('anxiety') || q.includes('worry')) {
+                    answer = `📖 PEACE: God's Gift in the Midst of Chaos\n\n"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus." — Philippians 4:6-7\n\nAnxiety is a common struggle, but God offers us something better—His peace. This peace is not dependent on our circumstances. It's not the absence of storms, but the presence of Christ in the midst of them. When we bring our worries to God in prayer, something supernatural happens. His peace acts as a guard around our hearts and minds.\n\nThis peace surpasses human understanding—meaning we don't have to understand everything to experience it. Even when we can't see the way out, God's peace can fill our hearts.\n\n💭 Reflection: What is causing you anxiety today? Have you brought it to God in prayer? What would it look like to release that burden to Him?\n\n🙏 Prayer: Lord Jesus, You said "Peace I leave with you." Today I receive that peace. When my heart is troubled, remind me that You are with me. Let Your peace guard my heart and mind. Amen.`;
+                }
+                else if(q.includes('love')) {
+                    answer = `📖 LOVE: The Greatest Commandment\n\n"Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God. Whoever does not love does not know God, because God is love." — 1 John 4:7-8\n\nLove is not just a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This love is unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.\n\nThis is the love that God showed us through Jesus Christ, who died for us while we were still sinners. The Bible tells us that we love because He first loved us.\n\n💭 Reflection: Who in your life is difficult to love? How can you show them God's love today in a practical way?\n\n🙏 Prayer: Father, You are love. Fill me with Your love so that I can love others as You have loved me. Let Your love flow through me to those around me. Amen.`;
+                }
+                else if(q.includes('prayer')) {
+                    answer = `📖 PRAYER: Your Direct Line to God\n\n"Pray without ceasing." — 1 Thessalonians 5:17\n\nPrayer is not just a religious ritual—it's a relationship. It's talking with God, listening to God, and walking with God. Through prayer, we bring our joys, sorrows, fears, and hopes before the One who created us. Jesus modeled a life of prayer. He often withdrew to lonely places to pray (Luke 5:16). He taught us to pray with simplicity and faith: "Our Father in heaven..."\n\nPrayer is not about using fancy words or praying for hours. It's about coming to God with an open heart, trusting that He hears you. As 1 John 5:14 says, "This is the confidence we have in approaching God: that if we ask anything according to His will, He hears us."\n\n💭 Reflection: How is your prayer life? What would it look like to set aside intentional time to talk with God today?\n\n🙏 Prayer: Lord, teach me to pray. Help me to come to You with an open heart, trusting that You hear me. Draw me closer to You through prayer. Amen.`;
+                }
+                else {
+                    answer = `📖 GOD'S WORD: A Lamp to Your Feet\n\n"Your word is a lamp to my feet and a light to my path." — Psalm 119:105\n\nThe Bible is God's love letter to us. It contains His promises, His instructions, and His story of redemption. As you seek to understand more about "${question}", remember that God desires to reveal Himself to you through His Word.\n\nTake time to read Scripture prayerfully, asking God to speak to you. As you meditate on His Word, He will guide your steps and give you wisdom for your journey.\n\n💭 Reflection: What is one verse or passage you can meditate on today? How can you apply it to your life?\n\n🙏 Prayer: Lord, open my eyes to see wonderful things in Your Word. Speak to me through Scripture. Help me to not just read Your Word, but to live it out. Amen.`;
                 }
                 
-                const devotionalHTML = `<div style="background:#fff5eb; padding:20px; border-radius:12px; white-space:pre-line; line-height:1.6;"><strong>Your Question:</strong> "${question}"<br><br>${answer}</div>`;
+                const devotionalHTML = `<div style="background:#fff5eb; padding:20px; border-radius:12px; white-space:pre-line; line-height:1.6;">${answer}</div>`;
                 responseContent.innerHTML = devotionalHTML;
-                currentDevotionalText = `✨ ${question}\n\n${answer}\n\nShare from Soul Rescuers Ministry App`;
+                currentDevotionalText = answer;
                 shareButtons.style.display = 'flex';
-                history.unshift({question:question, answer:answer.substring(0,200), date:new Date().toLocaleDateString()});
+                history.unshift({question:question, answer:answer.substring(0,150), date:new Date().toLocaleDateString()});
                 saveHistory(); displayHistory();
                 document.getElementById('user-question').value = '';
-            }, 1000);
+            }, 800);
         }
 
         function shareDevotional() { if(currentDevotionalText) window.open(`https://wa.me/?text=${encodeURIComponent(currentDevotionalText)}`, '_blank'); }
         function shareDailyDevotional() {
             const d = devotionals[devotionalIndex];
-            const shareText = `✨ ${d.title}\n\n${d.verse_text} — ${d.verse}\n\n${d.explanation}\n\n💭 ${d.reflection}\n\n🙏 ${d.prayer}\n\nShare from Soul Rescuers Ministry App`;
+            const shareText = `✨ ${d.title}\n\n"${d.verse_text}" — ${d.verse}\n\n${d.explanation}\n\n💭 ${d.reflection}\n\n🙏 ${d.prayer}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
         }
         function shareBibleVerse() {
             const verseText = document.getElementById('bible-text').innerText;
-            window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${verseText.substring(0,800)}\n\nShare from Soul Rescuers Ministry App`)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${verseText.substring(0,800)}`)}`, '_blank');
         }
 
+        // Bible functions
         function selectTestament(testament) {
             currentTestament = testament;
             const books = testament === 'ot' ? oldTestamentBooks : newTestamentBooks;
@@ -281,20 +316,26 @@
                     const verses = data.text.split('\n');
                     verses.forEach((verse, idx) => { if(verse.trim()) formatted += `<span class="verse-number">${idx+1}</span> ${verse}<br>`; });
                     bibleTextDiv.innerHTML = formatted;
-                } else { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Your word is a lamp to my feet and a light to my path. — Psalm 119:105`; }
-            } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 All Scripture is God-breathed and is useful for teaching. — 2 Timothy 3:16`; }
+                } else { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105`; }
+            } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed." — 2 Timothy 3:16`; }
         }
 
         function loadDevotional() {
             const d = devotionals[devotionalIndex];
             document.getElementById('daily-devotional-content').innerHTML = `
                 <div class="devotional-card"><h3>✨ ${d.title}</h3><p style="font-style:italic;">"${d.verse_text}"</p><p>— ${d.verse}</p></div>
-                <div class="card"><h3>📖 Deep Understanding</h3><p style="line-height:1.6;">${d.explanation}</p><div class="reflection-box"><h3>💭 Reflection</h3><p>${d.reflection}</p><h3>🙏 Prayer</h3><p>${d.prayer}</p></div></div>`;
+                <div class="card"><h3>📖 Understanding</h3><p style="line-height:1.6;">${d.explanation}</p><div class="reflection-box"><h3>💭 Reflection</h3><p>${d.reflection}</p><h3>🙏 Prayer</h3><p>${d.prayer}</p></div></div>`;
         }
         function prevDevotional() { devotionalIndex = (devotionalIndex-1+devotionals.length)%devotionals.length; loadDevotional(); }
         function nextDevotional() { devotionalIndex = (devotionalIndex+1)%devotionals.length; loadDevotional(); }
+        
         function loadSermons() {
-            const sermons = [{title:"The Power of Prayer", speaker:"Pastor Michael", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},{title:"Walking in Faith", speaker:"Pastor Sarah", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},{title:"Faith That Moves Mountains", speaker:"Pastor John", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},{title:"Living with Purpose", speaker:"Pastor David", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"}];
+            const sermons = [
+                {title:"The Power of Prayer", speaker:"Pastor Michael", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+                {title:"Walking in Faith", speaker:"Pastor Sarah", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+                {title:"Faith That Moves Mountains", speaker:"Pastor John", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+                {title:"Living with Purpose", speaker:"Pastor David", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"}
+            ];
             const container = document.getElementById('sermons-list');
             container.innerHTML = '';
             sermons.forEach(sermon => {
@@ -305,6 +346,7 @@
                 container.appendChild(div);
             });
         }
+        
         function switchPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.getElementById(`${page}-page`).classList.add('active-page');
