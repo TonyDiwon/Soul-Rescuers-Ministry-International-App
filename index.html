@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Soul Rescuers Ministry | Complete Bible + Deep Devotionals</title>
+    <title>Soul Rescuers Ministry International | Faith Forward</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -20,7 +20,8 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .app-header img { height: 55px; width: auto; margin-bottom: 8px; }
-        .app-header p { font-size: 12px; opacity: 0.9; }
+        .app-header h1 { font-size: 18px; margin: 5px 0; }
+        .app-header p { font-size: 11px; opacity: 0.9; }
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: white; display: flex; justify-content: space-around;
@@ -96,6 +97,7 @@
 <body>
     <div class="app-header">
         <img src="Weixin_Image_20260326124503_1041_69-removebg-preview.png" alt="Soul Rescuers Ministry" style="height: 55px; width: auto; margin-bottom: 8px;">
+        <h1>Soul Rescuers Ministry International</h1>
         <p>Faith Forward • Daily Devotion & Bible Study</p>
     </div>
 
@@ -316,8 +318,12 @@
                     const verses = data.text.split('\n');
                     verses.forEach((verse, idx) => { if(verse.trim()) formatted += `<span class="verse-number">${idx+1}</span> ${verse}<br>`; });
                     bibleTextDiv.innerHTML = formatted;
-                } else { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105`; }
-            } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed." — 2 Timothy 3:16`; }
+                } else {
+                    bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105<br><br>Please try another chapter or book.`;
+                }
+            } catch(e) { 
+                bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed." — 2 Timothy 3:16<br><br>If verses don't load, please try another chapter.`;
+            }
         }
 
         function loadDevotional() {
