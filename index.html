@@ -122,40 +122,32 @@
     </div>
 
     <div class="content">
-        <!-- Home / For You Page -->
         <div id="home-page" class="page active-page">
             <div class="ai-input-section">
                 <h3>✨ What's on your mind?</h3>
                 <p style="color: #6c757d; font-size: 14px;">Get a scripture-based devotional</p>
-                <textarea id="user-question" rows="3" placeholder="e.g., 'What does the Bible say about faith?' or 'Teach me about love'"></textarea>
+                <textarea id="user-question" rows="3" placeholder="e.g., 'What does the Bible say about faith?'"></textarea>
                 <button id="get-devotional-btn">📖 Get Devotional</button>
             </div>
             <div id="ai-response" class="card" style="display: none;">
                 <h3>📖 Your Devotional</h3>
                 <div id="ai-response-content"></div>
                 <div class="share-icons" id="share-buttons" style="display: none;">
-                    <div class="share-icon share-wa" onclick="shareCurrentDevotional()">📱 Share via WhatsApp</div>
+                    <div class="share-icon share-wa" onclick="shareCurrentDevotional()">📱 Share</div>
                 </div>
             </div>
-            <div style="margin-top: 20px;">
-                <h3>📜 History</h3>
-                <div id="history-list"><p style="color: #6c757d; text-align: center;">Your devotional history will appear here</p></div>
-            </div>
+            <div style="margin-top: 20px;"><h3>📜 History</h3><div id="history-list"><p style="color: #6c757d; text-align: center;">Your history will appear here</p></div></div>
         </div>
 
-        <!-- Daily Devotional Page -->
         <div id="devotional-page" class="page">
             <div id="daily-devotional-content"></div>
-            <div class="share-icons" style="margin-top: 10px;">
-                <div class="share-icon share-wa" onclick="shareDailyDevotional()">📱 Share Devotional</div>
-            </div>
+            <div class="share-icons"><div class="share-icon share-wa" onclick="shareDailyDevotional()">📱 Share Devotional</div></div>
             <div style="display: flex; gap: 12px; margin-top: 16px;">
                 <button id="prev-devotional" style="background: #e9ecef; color: #2c3e50;">← Previous</button>
                 <button id="next-devotional">Next →</button>
             </div>
         </div>
 
-        <!-- Bible Page -->
         <div id="bible-page" class="page">
             <h2>📖 Holy Bible</h2>
             <div class="card">
@@ -165,14 +157,11 @@
                 </div>
                 <select id="book-select"></select>
                 <select id="chapter-select"></select>
-                <div id="bible-text" class="bible-text">Select a book and chapter to read God's Word.</div>
-                <div class="share-icons" style="margin-top: 12px;">
-                    <div class="share-icon share-wa" onclick="shareBibleVerse()">📱 Share Chapter</div>
-                </div>
+                <div id="bible-text" class="bible-text">Select a book and chapter</div>
+                <div class="share-icons"><div class="share-icon share-wa" onclick="shareBibleVerse()">📱 Share Chapter</div></div>
             </div>
         </div>
 
-        <!-- Sermons Page -->
         <div id="sermons-page" class="page">
             <h2>🎧 Sermons</h2>
             <div id="sermons-list"></div>
@@ -187,42 +176,26 @@
     </div>
 
     <script>
-        // ============ BIBLE BOOKS ============
         const oldTestamentBooks = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi"];
         const newTestamentBooks = ["Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
-        
-        const chapterCounts = {
-            "Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,
-            "1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,
-            "Nehemiah":13,"Esther":10,"Job":42,"Psalms":150,"Proverbs":31,"Ecclesiastes":12,"Song of Solomon":8,
-            "Isaiah":66,"Jeremiah":52,"Lamentations":5,"Ezekiel":48,"Daniel":12,"Hosea":14,"Joel":3,"Amos":9,
-            "Obadiah":1,"Jonah":4,"Micah":7,"Nahum":3,"Habakkuk":3,"Zephaniah":3,"Haggai":2,"Zechariah":14,"Malachi":4,
-            "Matthew":28,"Mark":16,"Luke":24,"John":21,"Acts":28,"Romans":16,"1 Corinthians":16,"2 Corinthians":13,
-            "Galatians":6,"Ephesians":6,"Philippians":4,"Colossians":4,"1 Thessalonians":5,"2 Thessalonians":3,
-            "1 Timothy":6,"2 Timothy":4,"Titus":3,"Philemon":1,"Hebrews":13,"James":5,"1 Peter":5,"2 Peter":3,
-            "1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22
-        };
+        const chapterCounts = {"Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,"1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,"Nehemiah":13,"Esther":10,"Job":42,"Psalms":150,"Proverbs":31,"Ecclesiastes":12,"Song of Solomon":8,"Isaiah":66,"Jeremiah":52,"Lamentations":5,"Ezekiel":48,"Daniel":12,"Hosea":14,"Joel":3,"Amos":9,"Obadiah":1,"Jonah":4,"Micah":7,"Nahum":3,"Habakkuk":3,"Zephaniah":3,"Haggai":2,"Zechariah":14,"Malachi":4,"Matthew":28,"Mark":16,"Luke":24,"John":21,"Acts":28,"Romans":16,"1 Corinthians":16,"2 Corinthians":13,"Galatians":6,"Ephesians":6,"Philippians":4,"Colossians":4,"1 Thessalonians":5,"2 Thessalonians":3,"1 Timothy":6,"2 Timothy":4,"Titus":3,"Philemon":1,"Hebrews":13,"James":5,"1 Peter":5,"2 Peter":3,"1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22};
 
-        // ============ LONG SERMONS (No Pastor Names) ============
         const sermons = [
-            {title:"The Power of Prayer", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", scripture:"Philippians 4:6-7", fullText:`Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.\n\n📖 INTRODUCTION\n\nPrayer is not just a religious ritual—it is a lifeline to God. It is our direct communication with the Creator of the universe. Yet many of us struggle with prayer. We wonder if we're doing it right, if God is listening, or if our prayers even matter.\n\n🙏 THE FOUNDATION OF PRAYER\n\nPrayer is simply talking with God. It doesn't require fancy words or perfect theology. Jesus taught His disciples to pray with simplicity: "Our Father in heaven, hallowed be Your name" (Matthew 6:9). Prayer begins with acknowledging who God is—our loving Father.\n\nWhen we pray, we enter into the presence of the One who knows us completely and loves us unconditionally. There is no formula, no secret code. Just an open heart before an open throne.\n\n💡 WHY PRAYER MATTERS\n\n1. Prayer Aligns Our Hearts with God's Will\n2. Prayer Brings Peace in Chaos\n3. Prayer Moves the Hand of God\n\n📖 HOW TO DEEPEN YOUR PRAYER LIFE\n\n1. Set Aside Time Daily\n2. Pray Scripture\n3. Pray with Others\n4. Listen as Much as You Speak\n\n🙏 CONCLUSION\n\nPrayer is not about getting what we want—it's about becoming who God wants us to be. As you commit to a life of prayer, you will find that the One who meets you in the secret place is more than enough for every need.`},
-            {title:"Walking in Faith", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", scripture:"2 Corinthians 5:7", fullText:`For we live by faith, not by sight.\n\n📖 INTRODUCTION\n\nFaith is the foundation of our Christian walk. Without faith, it is impossible to please God (Hebrews 11:6). But what does it mean to walk by faith and not by sight?\n\n📖 THE DEFINITION OF FAITH\n\nHebrews 11:1 gives us the classic definition: "Now faith is confidence in what we hope for and assurance about what we do not see." Faith is not blind optimism—it is confident trust in the character and promises of God.\n\n📖 FAITH IN ACTION\n\nAbraham left his homeland without knowing where he was going. Moses led Israel through the Red Sea without seeing the path. Peter walked on water until he looked at the waves. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus despite the fear.\n\n💡 HOW TO GROW YOUR FAITH\n\n1. Feed Your Faith with God's Word\n2. Remember God's Faithfulness\n3. Step Out in Obedience\n4. Surround Yourself with Faith-Filled People\n\n🙏 CONCLUSION\n\nWalking by faith is a daily decision. It's choosing to trust God when the path is unclear, believing that He who began a good work in you will carry it to completion (Philippians 1:6).`},
-            {title:"Faith That Moves Mountains", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", scripture:"Matthew 17:20", fullText:`"Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, 'Move from here to there,' and it will move." — Matthew 17:20\n\n📖 INTRODUCTION\n\nJesus made a staggering promise: faith as small as a mustard seed can move mountains.\n\n📖 UNDERSTANDING THE MUSTARD SEED\n\nThe mustard seed was the smallest seed known to Jesus' audience, yet it grows into a large plant. Jesus taught that it's not the size of our faith that matters—it's the object of our faith.\n\n⛰️ WHAT ARE THE MOUNTAINS IN YOUR LIFE?\n\nMountains of fear, unforgiveness, addiction, doubt, and unbelief.\n\n💡 FAITH THAT MOVES MOUNTAINS\n\n1. Faith Speaks to the Mountain\n2. Faith Refuses to Be Moved by Circumstances\n3. Faith Persists\n\n🙏 CONCLUSION\n\nThe same Jesus who said, "Nothing will be impossible for you," is with you today. Speak to your mountain, and watch it move.`},
-            {title:"Living with Purpose", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", scripture:"Ephesians 2:10", fullText:`For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.\n\n📖 INTRODUCTION\n\nEvery one of us longs to know that our lives matter. God's Word assures us that we are not accidents—we are His handiwork, created with purpose.\n\n🎨 YOU ARE GOD'S MASTERPIECE\n\nThe word "handiwork" in Ephesians 2:10 is the Greek word "poiema," from which we get "poem." You are God's poem—His masterpiece, His work of art.\n\n🔍 DISCOVERING YOUR PURPOSE\n\n1. Purpose Is Found in Relationship with God\n2. Purpose Is Revealed Through Your Design\n3. Purpose Is Confirmed in Community\n4. Purpose Is Lived Out in Service\n\n💡 LIVING YOUR PURPOSE DAILY\n\n- Seek God First\n- Say Yes to What's in Front of You\n- Serve Where You're Planted\n- Keep Growing\n\n🙏 CONCLUSION\n\nYou are not an accident. You are God's masterpiece, created with intention. Your life matters. Your purpose is real.`}
+            {title:"The Power of Prayer", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", scripture:"Philippians 4:6-7", fullText:`Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.\n\n📖 INTRODUCTION\n\nPrayer is not just a religious ritual—it is a lifeline to God. It is our direct communication with the Creator of the universe.\n\n🙏 THE FOUNDATION OF PRAYER\n\nPrayer is simply talking with God. It doesn't require fancy words or perfect theology. Jesus taught His disciples to pray with simplicity: "Our Father in heaven, hallowed be Your name" (Matthew 6:9).\n\n💡 WHY PRAYER MATTERS\n\n1. Prayer Aligns Our Hearts with God's Will\n2. Prayer Brings Peace in Chaos\n3. Prayer Moves the Hand of God\n\n📖 HOW TO DEEPEN YOUR PRAYER LIFE\n\n1. Set Aside Time Daily\n2. Pray Scripture\n3. Pray with Others\n4. Listen as Much as You Speak\n\n🙏 CONCLUSION\n\nPrayer is not about getting what we want—it's about becoming who God wants us to be.`},
+            {title:"Walking in Faith", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", scripture:"2 Corinthians 5:7", fullText:`For we live by faith, not by sight.\n\n📖 INTRODUCTION\n\nFaith is the foundation of our Christian walk. Without faith, it is impossible to please God (Hebrews 11:6).\n\n📖 THE DEFINITION OF FAITH\n\nHebrews 11:1 gives us the classic definition: "Now faith is confidence in what we hope for and assurance about what we do not see."\n\n📖 FAITH IN ACTION\n\nAbraham left his homeland without knowing where he was going. Moses led Israel through the Red Sea without seeing the path. Peter walked on water until he looked at the waves.\n\n💡 HOW TO GROW YOUR FAITH\n\n1. Feed Your Faith with God's Word\n2. Remember God's Faithfulness\n3. Step Out in Obedience\n4. Surround Yourself with Faith-Filled People\n\n🙏 CONCLUSION\n\nWalking by faith is a daily decision. It's choosing to trust God when the path is unclear.`},
+            {title:"Faith That Moves Mountains", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", scripture:"Matthew 17:20", fullText:`"Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, 'Move from here to there,' and it will move."\n\n📖 INTRODUCTION\n\nJesus made a staggering promise: faith as small as a mustard seed can move mountains.\n\n📖 UNDERSTANDING THE MUSTARD SEED\n\nThe mustard seed was the smallest seed known to Jesus' audience, yet it grows into a large plant. It's not the size of our faith that matters—it's the object of our faith.\n\n⛰️ WHAT ARE THE MOUNTAINS IN YOUR LIFE?\n\nMountains of fear, unforgiveness, addiction, doubt, and unbelief.\n\n💡 FAITH THAT MOVES MOUNTAINS\n\n1. Faith Speaks to the Mountain\n2. Faith Refuses to Be Moved by Circumstances\n3. Faith Persists\n\n🙏 CONCLUSION\n\nYour faith may be small, but your God is great. Speak to your mountain, and watch it move.`},
+            {title:"Living with Purpose", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", scripture:"Ephesians 2:10", fullText:`For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.\n\n📖 INTRODUCTION\n\nEvery one of us longs to know that our lives matter. God's Word assures us that we are not accidents—we are His handiwork.\n\n🎨 YOU ARE GOD'S MASTERPIECE\n\nThe word "handiwork" in Ephesians 2:10 is the Greek word "poiema," from which we get "poem." You are God's poem—His masterpiece.\n\n🔍 DISCOVERING YOUR PURPOSE\n\n1. Purpose Is Found in Relationship with God\n2. Purpose Is Revealed Through Your Design\n3. Purpose Is Confirmed in Community\n4. Purpose Is Lived Out in Service\n\n🙏 CONCLUSION\n\nYou are not an accident. You are God's masterpiece, created with intention. Your life matters.`}
         ];
 
-        // ============ LONG DEVOTIONALS ============
         const devotionals = [
             {title:"Walking by Faith", verse:"2 Corinthians 5:7", verse_text:"For we live by faith, not by sight.",
             explanation:`Faith is the very foundation of our walk with God. It is not merely believing that God exists—even demons believe that. Faith is trusting God so completely that His promises become more real to us than our circumstances.\n\nThink of Abraham: God called him to leave his homeland and go to a place he had never seen. He went, even though he did not know where he was going. Abraham didn't have a map or a timeline—he only had God's word. And that was enough.\n\nThink of Moses: He stood at the edge of the Red Sea with Pharaoh's army behind him and water before him. Human reasoning said, "You're trapped." But faith said, "Stand still and see the salvation of the Lord."\n\nThink of Peter: He stepped out of the boat at Jesus' command. As long as he kept his eyes on Jesus, he walked on water. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus despite the fear.\n\nFaith is not about having all the answers. It's about knowing the One who does. When we walk by faith, we acknowledge that God's ways are higher than our ways (Isaiah 55:9).\n\n💡 How to Strengthen Your Faith:\n1. Feed Your Faith with God's Word – "Faith comes from hearing, and hearing through the word of Christ" (Romans 10:17).\n2. Remember God's Faithfulness – Look back at how God has been faithful in the past.\n3. Step Out in Obedience – Faith grows with use. Each step of obedience strengthens your trust.\n4. Surround Yourself with Faith-Filled People – Being around people who trust God inspires your own faith.`,
             reflection:"What area of your life are you trying to control instead of trusting God?",
             prayer:"Heavenly Father, increase my faith. Help me to trust You even when I cannot see the outcome. Give me courage to take the next step of obedience. In Jesus' name, Amen."},
-            
             {title:"The Peace of God", verse:"Philippians 4:6-7", verse_text:"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
             explanation:`Anxiety is one of the most common struggles of the human heart. We worry about our finances, our health, our children, our future. We lie awake at night, our minds racing through scenarios we cannot control. In these moments, God's Word offers us something better—His peace.\n\nThis peace is not dependent on our circumstances. It is not the absence of storms, but the presence of Christ in the midst of them. Jesus said, "Peace I leave with you; my peace I give you. I do not give to you as the world gives" (John 14:27). The world's peace is fragile—it disappears when trouble comes. But Christ's peace remains steady, anchored in the unchanging character of God.\n\nWhen we bring our worries to God in prayer, something supernatural happens. Paul writes, "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." And what is the result? "The peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."\n\nConsider Paul's circumstances when he wrote these words. He was in chains, imprisoned for his faith. Yet he spoke of joy and peace. If Paul could find peace in a prison cell, we can find peace in our situations.\n\nThis peace surpasses human understanding—meaning we don't have to understand everything to experience it. We simply need to bring our concerns to God and trust Him with the outcome.\n\n💡 How to Receive God's Peace:\n1. Pray about Everything – Bring every worry, every fear, every concern to God.\n2. Pray with Thanksgiving – Gratitude shifts our focus from what's wrong to what's right.\n3. Pray with Faith – Trust that God hears you and cares for you.\n4. Receive His Peace – After you have prayed, choose to receive the peace God offers.`,
             reflection:"What is causing you anxiety today? Have you brought it to God in prayer?",
             prayer:"Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. When my heart is troubled, remind me that You are with me. Let Your peace guard my heart and mind. Amen."},
-            
             {title:"Love One Another", verse:"1 John 4:7-8", verse_text:"Dear friends, let us love one another, for love comes from God.",
             explanation:`Love is not merely a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This is what makes love so powerful and transformative.\n\nThe apostle John writes, "Dear friends, let us love one another, for love comes from God." Love originates in God. Before we ever loved Him, He loved us. Before we ever loved anyone, He poured His love into our hearts through the Holy Spirit.\n\nThis love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.\n\nThis is the love that God demonstrated through Jesus Christ. "While we were still sinners, Christ died for us" (Romans 5:8). He didn't wait for us to get our act together. He loved us because He is love.\n\n1 Corinthians 13 gives us a beautiful description of this love: It is patient and kind. It does not envy or boast. It is not proud or rude. It keeps no record of wrongs. It always protects, always trusts, always hopes, always perseveres.\n\nThis is the love we are called to live out daily. Not just in grand gestures, but in small, everyday moments. A kind word to a weary soul. A listening ear to someone who is hurting. A patient response to someone who has wronged us.\n\n💡 How to Love Like Jesus:\n1. Receive God's Love – You cannot give what you have not received.\n2. Look for Opportunities – Love is not passive. Look for ways to serve and bless others.\n3. Love When It's Hard – True love is tested in difficult circumstances.\n4. Forgive as You Have Been Forgiven – Unforgiveness blocks love.`,
             reflection:"Who in your life is difficult to love? How can you show them God's love today?",
@@ -236,7 +209,6 @@
         let history = [];
         let currentDevotionalText = '';
 
-        // History functions
         function loadHistory() { const saved = localStorage.getItem('devotional_history'); if(saved){ history = JSON.parse(saved); displayHistory(); } }
         function saveHistory() { localStorage.setItem('devotional_history', JSON.stringify(history.slice(-10))); }
         function displayHistory() {
@@ -245,7 +217,6 @@
             historyDiv.innerHTML = history.map(item => `<div class="history-item"><strong>❓ ${item.question}</strong><br><small>📖 ${item.answer.substring(0,100)}...</small></div>`).join('');
         }
 
-        // AI Devotional
         function generateDevotional() {
             const question = document.getElementById('user-question').value.trim();
             if(!question){ alert('Please enter what you want to study.'); return; }
@@ -255,11 +226,9 @@
             responseDiv.style.display = 'block';
             responseContent.innerHTML = '<div class="loading">✨ Preparing your devotional...</div>';
             shareButtons.style.display = 'none';
-            
             setTimeout(() => {
-                let answer = `📖 GOD'S WORD: A Lamp to Your Feet\n\n"Your word is a lamp to my feet and a light to my path." — Psalm 119:105\n\nAs you seek to understand "${question}", remember that God desires to reveal Himself to you through His Word. Take time to read Scripture prayerfully, asking God to speak to you. He will guide your steps and give you wisdom for your journey.\n\n🙏 Lord, open my eyes to see wonderful things in Your Word. Speak to me through Scripture. Amen.`;
-                const devotionalHTML = `<div style="background:#fff5eb; padding:20px; border-radius:12px; white-space:pre-line;">${answer}</div>`;
-                responseContent.innerHTML = devotionalHTML;
+                let answer = `📖 GOD'S WORD\n\n"Your word is a lamp to my feet and a light to my path." — Psalm 119:105\n\nAs you seek to understand "${question}", remember that God desires to reveal Himself to you through His Word. Take time to read Scripture prayerfully, asking God to speak to you.\n\n🙏 Lord, open my eyes to see wonderful things in Your Word. Amen.`;
+                responseContent.innerHTML = `<div style="background:#fff5eb; padding:20px; border-radius:12px; white-space:pre-line;">${answer}</div>`;
                 currentDevotionalText = answer;
                 shareButtons.style.display = 'flex';
                 history.unshift({question:question, answer:answer.substring(0,150), date:new Date().toLocaleDateString()});
@@ -279,7 +248,6 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${verseText.substring(0,800)}`)}`, '_blank');
         }
 
-        // Sermons functions
         function loadSermons() {
             const container = document.getElementById('sermons-list');
             container.innerHTML = '';
@@ -303,9 +271,7 @@
                     <p style="color:#6c757d;">📖 ${sermon.scripture}</p>
                     <div class="sermon-full-text">${sermon.fullText.replace(/\n/g, '<br>')}</div>
                     <audio controls src="${sermon.audioUrl}"></audio>
-                    <div class="share-icons" style="margin-top:12px;">
-                        <div class="share-icon share-wa" onclick="shareSermon('${sermon.title}')">📱 Share Sermon</div>
-                    </div>
+                    <div class="share-icons"><div class="share-icon share-wa" onclick="shareSermon('${sermon.title}')">📱 Share</div></div>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -314,7 +280,6 @@
 
         function shareSermon(title) { window.open(`https://wa.me/?text=${encodeURIComponent(`🎧 ${title}\n\nShare from Soul Rescuers Ministry App`)}`, '_blank'); }
 
-        // Bible functions
         function selectTestament(testament) {
             currentTestament = testament;
             const books = testament === 'ot' ? oldTestamentBooks : newTestamentBooks;
@@ -354,7 +319,6 @@
             } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Please check connection.`; }
         }
 
-        // Devotional functions
         function loadDevotional() {
             const d = devotionals[devotionalIndex];
             document.getElementById('daily-devotional-content').innerHTML = `
@@ -364,7 +328,6 @@
         function prevDevotional() { devotionalIndex = (devotionalIndex-1+devotionals.length)%devotionals.length; loadDevotional(); }
         function nextDevotional() { devotionalIndex = (devotionalIndex+1)%devotionals.length; loadDevotional(); }
 
-        // Navigation
         function switchPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.getElementById(`${page}-page`).classList.add('active-page');
@@ -373,8 +336,16 @@
             if(page === 'bible') fetchBibleVerse();
         }
 
-        // Initialize
         document.getElementById('get-devotional-btn').onclick = generateDevotional;
         document.getElementById('prev-devotional').onclick = prevDevotional;
         document.getElementById('next-devotional').onclick = nextDevotional;
-       
+        document.getElementById('book-select').onchange = function() { updateChapterSelect(); fetchBibleVerse(); };
+        document.getElementById('chapter-select').onchange = fetchBibleVerse;
+        
+        loadDevotional();
+        loadSermons();
+        loadHistory();
+        selectTestament('ot');
+    </script>
+</body>
+</html>
