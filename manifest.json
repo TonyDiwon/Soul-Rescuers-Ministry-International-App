@@ -1,0 +1,23 @@
+{
+  "name": "Soul Rescuers Ministry International",
+  "short_name": "Soul Rescuers",
+  "description": "Faith Forward • Daily Devotion & Bible Study",
+  "start_url": "/Soul-Rescuers-Ministry-International-App/",
+  "display": "standalone",
+  "background_color": "#8B4513",
+  "theme_color": "#D2691E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "Weixin_Image_20260326124503_1041_69-removebg-preview.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Weixin_Image_20260326124503_1041_69-removebg-preview.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
