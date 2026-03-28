@@ -69,8 +69,17 @@
             background: white; border-radius: 20px; padding: 20px;
             margin-bottom: 16px; cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            gap: 16px;
+            align-items: center;
         }
         .sermon-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .sermon-icon {
+            width: 60px; height: 60px; background: #D2691E; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px;
+        }
+        .sermon-info { flex: 1; }
         .sermon-title { font-weight: bold; font-size: 18px; color: #2c3e50; }
         .sermon-scripture { font-size: 12px; color: #6c757d; margin-top: 4px; }
         .ai-input-section {
@@ -112,6 +121,17 @@
             white-space: pre-line;
         }
         audio { width: 100%; margin-top: 12px; }
+        .sermon-header-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sermon-header-img span {
+            font-size: 80px;
+            display: inline-block;
+            background: #fff0e6;
+            padding: 20px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -180,24 +200,34 @@
         const newTestamentBooks = ["Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
         const chapterCounts = {"Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,"1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,"Nehemiah":13,"Esther":10,"Job":42,"Psalms":150,"Proverbs":31,"Ecclesiastes":12,"Song of Solomon":8,"Isaiah":66,"Jeremiah":52,"Lamentations":5,"Ezekiel":48,"Daniel":12,"Hosea":14,"Joel":3,"Amos":9,"Obadiah":1,"Jonah":4,"Micah":7,"Nahum":3,"Habakkuk":3,"Zephaniah":3,"Haggai":2,"Zechariah":14,"Malachi":4,"Matthew":28,"Mark":16,"Luke":24,"John":21,"Acts":28,"Romans":16,"1 Corinthians":16,"2 Corinthians":13,"Galatians":6,"Ephesians":6,"Philippians":4,"Colossians":4,"1 Thessalonians":5,"2 Thessalonians":3,"1 Timothy":6,"2 Timothy":4,"Titus":3,"Philemon":1,"Hebrews":13,"James":5,"1 Peter":5,"2 Peter":3,"1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22};
 
+        // ============ LONG SERMONS WITH ICONS ============
         const sermons = [
-            {title:"The Power of Prayer", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", scripture:"Philippians 4:6-7", fullText:`Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.\n\n📖 INTRODUCTION\n\nPrayer is not just a religious ritual—it is a lifeline to God. It is our direct communication with the Creator of the universe.\n\n🙏 THE FOUNDATION OF PRAYER\n\nPrayer is simply talking with God. It doesn't require fancy words or perfect theology. Jesus taught His disciples to pray with simplicity: "Our Father in heaven, hallowed be Your name" (Matthew 6:9).\n\n💡 WHY PRAYER MATTERS\n\n1. Prayer Aligns Our Hearts with God's Will\n2. Prayer Brings Peace in Chaos\n3. Prayer Moves the Hand of God\n\n📖 HOW TO DEEPEN YOUR PRAYER LIFE\n\n1. Set Aside Time Daily\n2. Pray Scripture\n3. Pray with Others\n4. Listen as Much as You Speak\n\n🙏 CONCLUSION\n\nPrayer is not about getting what we want—it's about becoming who God wants us to be.`},
-            {title:"Walking in Faith", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", scripture:"2 Corinthians 5:7", fullText:`For we live by faith, not by sight.\n\n📖 INTRODUCTION\n\nFaith is the foundation of our Christian walk. Without faith, it is impossible to please God (Hebrews 11:6).\n\n📖 THE DEFINITION OF FAITH\n\nHebrews 11:1 gives us the classic definition: "Now faith is confidence in what we hope for and assurance about what we do not see."\n\n📖 FAITH IN ACTION\n\nAbraham left his homeland without knowing where he was going. Moses led Israel through the Red Sea without seeing the path. Peter walked on water until he looked at the waves.\n\n💡 HOW TO GROW YOUR FAITH\n\n1. Feed Your Faith with God's Word\n2. Remember God's Faithfulness\n3. Step Out in Obedience\n4. Surround Yourself with Faith-Filled People\n\n🙏 CONCLUSION\n\nWalking by faith is a daily decision. It's choosing to trust God when the path is unclear.`},
-            {title:"Faith That Moves Mountains", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", scripture:"Matthew 17:20", fullText:`"Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, 'Move from here to there,' and it will move."\n\n📖 INTRODUCTION\n\nJesus made a staggering promise: faith as small as a mustard seed can move mountains.\n\n📖 UNDERSTANDING THE MUSTARD SEED\n\nThe mustard seed was the smallest seed known to Jesus' audience, yet it grows into a large plant. It's not the size of our faith that matters—it's the object of our faith.\n\n⛰️ WHAT ARE THE MOUNTAINS IN YOUR LIFE?\n\nMountains of fear, unforgiveness, addiction, doubt, and unbelief.\n\n💡 FAITH THAT MOVES MOUNTAINS\n\n1. Faith Speaks to the Mountain\n2. Faith Refuses to Be Moved by Circumstances\n3. Faith Persists\n\n🙏 CONCLUSION\n\nYour faith may be small, but your God is great. Speak to your mountain, and watch it move.`},
-            {title:"Living with Purpose", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", scripture:"Ephesians 2:10", fullText:`For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.\n\n📖 INTRODUCTION\n\nEvery one of us longs to know that our lives matter. God's Word assures us that we are not accidents—we are His handiwork.\n\n🎨 YOU ARE GOD'S MASTERPIECE\n\nThe word "handiwork" in Ephesians 2:10 is the Greek word "poiema," from which we get "poem." You are God's poem—His masterpiece.\n\n🔍 DISCOVERING YOUR PURPOSE\n\n1. Purpose Is Found in Relationship with God\n2. Purpose Is Revealed Through Your Design\n3. Purpose Is Confirmed in Community\n4. Purpose Is Lived Out in Service\n\n🙏 CONCLUSION\n\nYou are not an accident. You are God's masterpiece, created with intention. Your life matters.`}
+            {title:"The Power of Prayer", icon:"🙏", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", scripture:"Philippians 4:6-7", 
+            fullText:`"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus." — Philippians 4:6-7\n\n📖 INTRODUCTION\n\nPrayer is not just a religious ritual—it is a lifeline to God. It is our direct communication with the Creator of the universe. Yet many of us struggle with prayer. The disciples themselves asked Jesus, "Lord, teach us to pray" (Luke 11:1). If they needed instruction, so do we.\n\n🙏 THE FOUNDATION OF PRAYER\n\nPrayer is simply talking with God. It doesn't require fancy words or perfect theology. Jesus taught His disciples to pray with simplicity: "Our Father in heaven, hallowed be Your name" (Matthew 6:9). Prayer begins with acknowledging who God is—our loving Father.\n\nWhen we pray, we enter into the presence of the One who knows us completely and loves us unconditionally. The writer of Hebrews encourages us: "Let us then approach God's throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need" (Hebrews 4:16).\n\n💡 WHY PRAYER MATTERS\n\n1. Prayer Aligns Our Hearts with God's Will — Jesus prayed, "Not my will, but Yours be done" (Luke 22:42). Prayer transforms our desires to match God's purposes.\n\n2. Prayer Brings Peace in Chaos — When we bring our worries to God, His peace guards our hearts and minds.\n\n3. Prayer Moves the Hand of God — James 5:16 reminds us, "The prayer of a righteous person is powerful and effective."\n\n📖 HOW TO DEEPEN YOUR PRAYER LIFE\n\n1. Set Aside Time Daily — Even 10 minutes in the morning can set the tone for everything else.\n2. Pray Scripture — The Psalms give words to our deepest emotions.\n3. Pray with Others — "Where two or three gather in my name, there am I with them" (Matthew 18:20).\n4. Listen as Much as You Speak — Prayer is a conversation.\n\n🙏 CONCLUSION\n\nPrayer is not about getting what we want—it's about becoming who God wants us to be. Start today. God is listening.`},
+            
+            {title:"Walking in Faith", icon:"👣", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", scripture:"2 Corinthians 5:7", 
+            fullText:`"For we live by faith, not by sight." — 2 Corinthians 5:7\n\n📖 INTRODUCTION\n\nFaith is the foundation of our Christian walk. Without faith, it is impossible to please God (Hebrews 11:6). But what does it mean to walk by faith and not by sight?\n\n📖 THE DEFINITION OF FAITH\n\nHebrews 11:1 gives the classic definition: "Now faith is confidence in what we hope for and assurance about what we do not see." Faith is not blind optimism—it is confident trust in the character and promises of God.\n\n📖 FAITH IN ACTION\n\n1. Abraham — left his homeland without knowing where he was going. He trusted God's promise.\n2. Moses — chose to be mistreated with God's people rather than enjoy Egypt's treasures.\n3. Peter — walked on water as long as he kept his eyes on Jesus.\n\n💡 HOW TO GROW YOUR FAITH\n\n1. Feed Your Faith with God's Word — "Faith comes from hearing, and hearing through the word of Christ" (Romans 10:17).\n2. Remember God's Faithfulness — David faced Goliath because he remembered God's deliverance from the lion and the bear.\n3. Step Out in Obedience — Faith grows with use.\n4. Surround Yourself with Faith-Filled People — Their testimonies inspire your own faith.\n\n🙏 CONCLUSION\n\nWalking by faith is a daily decision. Trust God when the path is unclear. He who began a good work in you will carry it to completion (Philippians 1:6).`},
+            
+            {title:"Faith That Moves Mountains", icon:"⛰️", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", scripture:"Matthew 17:20", 
+            fullText:`"Truly I tell you, if you have faith as small as a mustard seed, you can say to this mountain, 'Move from here to there,' and it will move." — Matthew 17:20\n\n📖 INTRODUCTION\n\nJesus made a staggering promise: faith as small as a mustard seed can move mountains. How can such a tiny amount of faith accomplish such a massive task? The answer lies not in the size of our faith, but in the greatness of God.\n\n📖 UNDERSTANDING THE MUSTARD SEED\n\nThe mustard seed was the smallest seed known to Jesus' audience, yet it grows into a large plant. It's not the size of our faith that matters—it's the object of our faith.\n\n⛰️ WHAT ARE THE MOUNTAINS IN YOUR LIFE?\n\n- Mountains of fear and anxiety\n- Mountains of unforgiveness\n- Mountains of addiction\n- Mountains of doubt\n\n💡 FAITH THAT MOVES MOUNTAINS\n\n1. Faith Speaks to the Mountain — Jesus didn't say to pray about the mountain—He said to speak to it.\n2. Faith Refuses to Be Moved by Circumstances — It trusts God's Word more than the circumstances.\n3. Faith Persists — Keep believing, keep speaking, keep trusting.\n\n🙏 CONCLUSION\n\nThe same Jesus who said, "Nothing will be impossible for you," is with you today. Speak to your mountain, and watch it move.`},
+            
+            {title:"Living with Purpose", icon:"🎯", audioUrl:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", scripture:"Ephesians 2:10", 
+            fullText:`"For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do." — Ephesians 2:10\n\n📖 INTRODUCTION\n\nEvery one of us longs to know that our lives matter. God's Word assures us that we are not accidents—we are His handiwork, created with purpose.\n\n🎨 YOU ARE GOD'S MASTERPIECE\n\nThe word "handiwork" in Ephesians 2:10 is the Greek word "poiema," from which we get "poem." You are God's poem—His masterpiece, His work of art. Before you took your first breath, God had a plan for your life. Jeremiah 1:5 says, "Before I formed you in the womb I knew you, before you were born I set you apart."\n\n🔍 DISCOVERING YOUR PURPOSE\n\n1. Purpose Is Found in Relationship with God — The greatest commandment is to love God with all your heart (Mark 12:30).\n2. Purpose Is Revealed Through Your Design — Your passions, talents, and experiences point to how He designed you.\n3. Purpose Is Confirmed in Community — We need each other to see what we sometimes miss.\n4. Purpose Is Lived Out in Service — "Created to do good works."\n\n💡 LIVING YOUR PURPOSE DAILY\n\n- Seek God First — Abide in Christ, and fruit will follow (John 15:5).\n- Say Yes to What's in Front of You — Be faithful in the little things.\n- Serve Where You're Planted — Start where you are.\n- Keep Growing — Purpose unfolds over a lifetime.\n\n🙏 CONCLUSION\n\nYou are not an accident. You are God's masterpiece, created with intention. Your life matters. Your purpose is real.`}
         ];
 
         const devotionals = [
             {title:"Walking by Faith", verse:"2 Corinthians 5:7", verse_text:"For we live by faith, not by sight.",
-            explanation:`Faith is the very foundation of our walk with God. It is not merely believing that God exists—even demons believe that. Faith is trusting God so completely that His promises become more real to us than our circumstances.\n\nThink of Abraham: God called him to leave his homeland and go to a place he had never seen. He went, even though he did not know where he was going. Abraham didn't have a map or a timeline—he only had God's word. And that was enough.\n\nThink of Moses: He stood at the edge of the Red Sea with Pharaoh's army behind him and water before him. Human reasoning said, "You're trapped." But faith said, "Stand still and see the salvation of the Lord."\n\nThink of Peter: He stepped out of the boat at Jesus' command. As long as he kept his eyes on Jesus, he walked on water. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus despite the fear.\n\nFaith is not about having all the answers. It's about knowing the One who does. When we walk by faith, we acknowledge that God's ways are higher than our ways (Isaiah 55:9).\n\n💡 How to Strengthen Your Faith:\n1. Feed Your Faith with God's Word – "Faith comes from hearing, and hearing through the word of Christ" (Romans 10:17).\n2. Remember God's Faithfulness – Look back at how God has been faithful in the past.\n3. Step Out in Obedience – Faith grows with use. Each step of obedience strengthens your trust.\n4. Surround Yourself with Faith-Filled People – Being around people who trust God inspires your own faith.`,
+            explanation:`Faith is the very foundation of our walk with God. It is not merely believing that God exists—even demons believe that. Faith is trusting God so completely that His promises become more real to us than our circumstances.\n\nThink of Abraham: God called him to leave his homeland and go to a place he had never seen. He went, even though he did not know where he was going. Abraham didn't have a map or a timeline—he only had God's word. And that was enough.\n\nThink of Moses: He stood at the edge of the Red Sea with Pharaoh's army behind him and water before him. Human reasoning said, "You're trapped." But faith said, "Stand still and see the salvation of the Lord."\n\nThink of Peter: He stepped out of the boat at Jesus' command. As long as he kept his eyes on Jesus, he walked on water. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus despite the fear.\n\n💡 How to Strengthen Your Faith:\n1. Feed Your Faith with God's Word – "Faith comes from hearing, and hearing through the word of Christ" (Romans 10:17).\n2. Remember God's Faithfulness – Look back at how God has been faithful in the past.\n3. Step Out in Obedience – Faith grows with use.\n4. Surround Yourself with Faith-Filled People – Being around people who trust God inspires your own faith.`,
             reflection:"What area of your life are you trying to control instead of trusting God?",
             prayer:"Heavenly Father, increase my faith. Help me to trust You even when I cannot see the outcome. Give me courage to take the next step of obedience. In Jesus' name, Amen."},
+            
             {title:"The Peace of God", verse:"Philippians 4:6-7", verse_text:"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
-            explanation:`Anxiety is one of the most common struggles of the human heart. We worry about our finances, our health, our children, our future. We lie awake at night, our minds racing through scenarios we cannot control. In these moments, God's Word offers us something better—His peace.\n\nThis peace is not dependent on our circumstances. It is not the absence of storms, but the presence of Christ in the midst of them. Jesus said, "Peace I leave with you; my peace I give you. I do not give to you as the world gives" (John 14:27). The world's peace is fragile—it disappears when trouble comes. But Christ's peace remains steady, anchored in the unchanging character of God.\n\nWhen we bring our worries to God in prayer, something supernatural happens. Paul writes, "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." And what is the result? "The peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."\n\nConsider Paul's circumstances when he wrote these words. He was in chains, imprisoned for his faith. Yet he spoke of joy and peace. If Paul could find peace in a prison cell, we can find peace in our situations.\n\nThis peace surpasses human understanding—meaning we don't have to understand everything to experience it. We simply need to bring our concerns to God and trust Him with the outcome.\n\n💡 How to Receive God's Peace:\n1. Pray about Everything – Bring every worry, every fear, every concern to God.\n2. Pray with Thanksgiving – Gratitude shifts our focus from what's wrong to what's right.\n3. Pray with Faith – Trust that God hears you and cares for you.\n4. Receive His Peace – After you have prayed, choose to receive the peace God offers.`,
+            explanation:`Anxiety is one of the most common struggles of the human heart. We worry about our finances, our health, our children, our future. We lie awake at night, our minds racing through scenarios we cannot control. In these moments, God's Word offers us something better—His peace.\n\nThis peace is not dependent on our circumstances. It is not the absence of storms, but the presence of Christ in the midst of them. Jesus said, "Peace I leave with you; my peace I give you. I do not give to you as the world gives" (John 14:27). The world's peace is fragile—it disappears when trouble comes. But Christ's peace remains steady.\n\nWhen we bring our worries to God in prayer, something supernatural happens. Paul writes, "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." And what is the result? "The peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."\n\nConsider Paul's circumstances when he wrote these words. He was in chains, imprisoned for his faith. Yet he spoke of joy and peace. If Paul could find peace in a prison cell, we can find peace in our situations.\n\n💡 How to Receive God's Peace:\n1. Pray about Everything – Bring every worry, every fear, every concern to God.\n2. Pray with Thanksgiving – Gratitude shifts our focus from what's wrong to what's right.\n3. Pray with Faith – Trust that God hears you and cares for you.\n4. Receive His Peace – After you have prayed, choose to receive the peace God offers.`,
             reflection:"What is causing you anxiety today? Have you brought it to God in prayer?",
             prayer:"Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. When my heart is troubled, remind me that You are with me. Let Your peace guard my heart and mind. Amen."},
+            
             {title:"Love One Another", verse:"1 John 4:7-8", verse_text:"Dear friends, let us love one another, for love comes from God.",
-            explanation:`Love is not merely a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This is what makes love so powerful and transformative.\n\nThe apostle John writes, "Dear friends, let us love one another, for love comes from God." Love originates in God. Before we ever loved Him, He loved us. Before we ever loved anyone, He poured His love into our hearts through the Holy Spirit.\n\nThis love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.\n\nThis is the love that God demonstrated through Jesus Christ. "While we were still sinners, Christ died for us" (Romans 5:8). He didn't wait for us to get our act together. He loved us because He is love.\n\n1 Corinthians 13 gives us a beautiful description of this love: It is patient and kind. It does not envy or boast. It is not proud or rude. It keeps no record of wrongs. It always protects, always trusts, always hopes, always perseveres.\n\nThis is the love we are called to live out daily. Not just in grand gestures, but in small, everyday moments. A kind word to a weary soul. A listening ear to someone who is hurting. A patient response to someone who has wronged us.\n\n💡 How to Love Like Jesus:\n1. Receive God's Love – You cannot give what you have not received.\n2. Look for Opportunities – Love is not passive. Look for ways to serve and bless others.\n3. Love When It's Hard – True love is tested in difficult circumstances.\n4. Forgive as You Have Been Forgiven – Unforgiveness blocks love.`,
+            explanation:`Love is not merely a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This is what makes love so powerful and transformative.\n\nThe apostle John writes, "Dear friends, let us love one another, for love comes from God." Love originates in God. Before we ever loved Him, He loved us. Before we ever loved anyone, He poured His love into our hearts through the Holy Spirit.\n\nThis love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.\n\nThis is the love that God demonstrated through Jesus Christ. "While we were still sinners, Christ died for us" (Romans 5:8). He didn't wait for us to get our act together. He loved us because He is love.\n\n1 Corinthians 13 gives us a beautiful description: It is patient and kind. It does not envy or boast. It is not proud or rude. It keeps no record of wrongs. It always protects, always trusts, always hopes, always perseveres.\n\n💡 How to Love Like Jesus:\n1. Receive God's Love – You cannot give what you have not received.\n2. Look for Opportunities – Love is not passive. Look for ways to serve and bless others.\n3. Love When It's Hard – True love is tested in difficult circumstances.\n4. Forgive as You Have Been Forgiven – Unforgiveness blocks love.`,
             reflection:"Who in your life is difficult to love? How can you show them God's love today?",
             prayer:"Father, You are love. Fill me with Your love so that I can love others as You have loved me. Let Your love flow through me to those around me. In Jesus' name, Amen."}
         ];
@@ -254,7 +284,13 @@
             sermons.forEach((sermon, index) => {
                 const div = document.createElement('div');
                 div.className = 'sermon-card';
-                div.innerHTML = `<div class="sermon-title">🎧 ${sermon.title}</div><div class="sermon-scripture">📖 ${sermon.scripture}</div>`;
+                div.innerHTML = `
+                    <div class="sermon-icon">${sermon.icon}</div>
+                    <div class="sermon-info">
+                        <div class="sermon-title">${sermon.title}</div>
+                        <div class="sermon-scripture">📖 ${sermon.scripture}</div>
+                    </div>
+                `;
                 div.onclick = () => openSermonModal(index);
                 container.appendChild(div);
             });
@@ -267,11 +303,12 @@
             modal.innerHTML = `
                 <div class="modal-content">
                     <button class="close-modal" onclick="this.closest('.modal-overlay').remove()">✕</button>
-                    <h2>🎧 ${sermon.title}</h2>
-                    <p style="color:#6c757d;">📖 ${sermon.scripture}</p>
+                    <div class="sermon-header-img"><span>${sermon.icon}</span></div>
+                    <h2 style="text-align:center;">${sermon.title}</h2>
+                    <p style="text-align:center; color:#6c757d;">📖 ${sermon.scripture}</p>
                     <div class="sermon-full-text">${sermon.fullText.replace(/\n/g, '<br>')}</div>
                     <audio controls src="${sermon.audioUrl}"></audio>
-                    <div class="share-icons"><div class="share-icon share-wa" onclick="shareSermon('${sermon.title}')">📱 Share</div></div>
+                    <div class="share-icons"><div class="share-icon share-wa" onclick="shareSermon('${sermon.title}')">📱 Share Sermon</div></div>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -316,36 +353,4 @@
                     data.verses.forEach(v => { formatted += `<span class="verse-number">${v.verse}</span> ${v.text.trim()}<br>`; });
                     bibleTextDiv.innerHTML = formatted;
                 } else { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 God's Word is a lamp to my feet.`; }
-            } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Please check connection.`; }
-        }
-
-        function loadDevotional() {
-            const d = devotionals[devotionalIndex];
-            document.getElementById('daily-devotional-content').innerHTML = `
-                <div class="devotional-card"><h3>✨ ${d.title}</h3><p>"${d.verse_text}"<br>— ${d.verse}</p></div>
-                <div class="card"><p style="line-height:1.6; white-space:pre-line;">${d.explanation}</p><div class="reflection-box"><h3>💭 Reflection</h3><p>${d.reflection}</p><h3>🙏 Prayer</h3><p>${d.prayer}</p></div></div>`;
-        }
-        function prevDevotional() { devotionalIndex = (devotionalIndex-1+devotionals.length)%devotionals.length; loadDevotional(); }
-        function nextDevotional() { devotionalIndex = (devotionalIndex+1)%devotionals.length; loadDevotional(); }
-
-        function switchPage(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.getElementById(`${page}-page`).classList.add('active-page');
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            event.target.closest('.nav-item').classList.add('active');
-            if(page === 'bible') fetchBibleVerse();
-        }
-
-        document.getElementById('get-devotional-btn').onclick = generateDevotional;
-        document.getElementById('prev-devotional').onclick = prevDevotional;
-        document.getElementById('next-devotional').onclick = nextDevotional;
-        document.getElementById('book-select').onchange = function() { updateChapterSelect(); fetchBibleVerse(); };
-        document.getElementById('chapter-select').onchange = fetchBibleVerse;
-        
-        loadDevotional();
-        loadSermons();
-        loadHistory();
-        selectTestament('ot');
-    </script>
-</body>
-</html>
+            } catch(e) { bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><
