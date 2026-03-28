@@ -295,13 +295,18 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${verseText.substring(0,800)}`)}`, '_blank');
         }
 
-        // Bible functions
+        // ============ IMPROVED BIBLE FUNCTIONS ============
         function selectTestament(testament) {
             currentTestament = testament;
             const books = testament === 'ot' ? oldTestamentBooks : newTestamentBooks;
             const bookSelect = document.getElementById('book-select');
             bookSelect.innerHTML = '';
-            books.forEach(book => { const option = document.createElement('option'); option.value = book; option.textContent = book; bookSelect.appendChild(option); });
+            books.forEach(book => { 
+                const option = document.createElement('option'); 
+                option.value = book; 
+                option.textContent = book; 
+                bookSelect.appendChild(option); 
+            });
             currentBook = books[0];
             updateChapterSelect();
             fetchBibleVerse();
@@ -314,7 +319,12 @@
             const max = chapterCounts[book] || 50;
             const chapterSelect = document.getElementById('chapter-select');
             chapterSelect.innerHTML = '';
-            for(let i=1;i<=max;i++){ const option = document.createElement('option'); option.value=i; option.textContent=`Chapter ${i}`; chapterSelect.appendChild(option); }
+            for(let i=1;i<=max;i++){ 
+                const option = document.createElement('option'); 
+                option.value=i; 
+                option.textContent=`Chapter ${i}`; 
+                chapterSelect.appendChild(option); 
+            }
         }
         
         async function fetchBibleVerse() {
@@ -322,27 +332,34 @@
             const chapter = document.getElementById('chapter-select').value;
             currentBook = book;
             currentChapter = chapter;
+
             const bibleTextDiv = document.getElementById('bible-text');
             bibleTextDiv.innerHTML = '<div class="loading">📖 Loading God\'s Word...</div>';
-            
+
             try {
                 const response = await fetch(`https://bible-api.com/${encodeURIComponent(book)}+${chapter}`);
                 const data = await response.json();
-                
-                if(data.text && data.text.length > 0) {
+
+                if (data.verses && data.verses.length > 0) {
                     let formatted = `<strong>${book} ${chapter}</strong><br><br>`;
-                    const verses = data.text.split(/\n/);
-                    verses.forEach((verse, idx) => { 
-                        if(verse.trim()) {
-                            formatted += `<span class="verse-number">${idx+1}</span> ${verse}<br>`;
-                        }
+
+                    data.verses.forEach(v => {
+                        formatted += `<span class="verse-number">${v.verse}</span> ${v.text.trim()}<br>`;
                     });
+
+                    // ✅ Optional validation (debugging)
+                    if (chapterCounts[book] && data.verses.length !== chapterCounts[book]) {
+                        console.warn(`⚠️ Verse mismatch in ${book} ${chapter}: expected ${chapterCounts[book]}, got ${data.verses.length}`);
+                    }
+
                     bibleTextDiv.innerHTML = formatted;
                 } else {
-                    bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet and a light to my path." — Psalm 119:105<br><br>Please try another chapter.`;
+                    bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>No verses found. Please try another chapter.`;
                 }
-            } catch(e) { 
-                bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness." — 2 Timothy 3:16<br><br>Please try another chapter or book.`;
+
+            } catch (e) {
+                console.error("Bible API error:", e);
+                bibleTextDiv.innerHTML = `<strong>${book} ${chapter}</strong><br><br>Error loading scripture. Please check internet connection.`;
             }
         }
 
