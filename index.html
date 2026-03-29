@@ -5,69 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Rescuers Ministry</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;background:#f0f2f5;padding-bottom:70px}
-        .header{background:linear-gradient(135deg,#8B4513,#D2691E);color:white;padding:20px;text-align:center}
-        .header h1{font-size:18px}
-        .nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 0}
-        .nav-btn{background:none;border:none;font-size:12px;padding:8px;cursor:pointer;color:#666}
-        .nav-btn.active{color:#D2691E;background:#fff0e6;border-radius:20px}
+        body{font-family:Arial;background:#f0f2f5;padding-bottom:70px;margin:0}
+        .header{background:#8B4513;color:white;padding:20px;text-align:center}
+        .header img{height:50px}
+        .nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px}
+        .nav button{background:none;border:none;font-size:12px;padding:8px;cursor:pointer}
+        .nav .active{color:#D2691E;background:#fff0e6;border-radius:20px}
         .content{padding:20px;max-width:600px;margin:0 auto}
         .page{display:none}
         .page.active{display:block}
         .card{background:white;border-radius:20px;padding:20px;margin-bottom:16px}
-        .gradient-card{background:linear-gradient(135deg,#8B4513,#D2691E);color:white;border-radius:20px;padding:24px;margin-bottom:20px}
-        h2{font-size:20px;margin-bottom:16px}
-        h3{font-size:18px;margin-bottom:12px}
-        button{background:#D2691E;color:white;border:none;padding:12px;border-radius:30px;width:100%;margin-top:12px;cursor:pointer;font-weight:bold}
-        select,textarea{width:100%;padding:14px;border-radius:30px;border:1px solid #ccc;margin-bottom:12px}
+        .gradient{background:linear-gradient(135deg,#8B4513,#D2691E);color:white;border-radius:20px;padding:24px}
+        button{background:#D2691E;color:white;border:none;padding:12px;border-radius:30px;width:100%;margin-top:10px;cursor:pointer}
+        select,textarea{width:100%;padding:12px;border-radius:30px;border:1px solid #ccc;margin-bottom:10px}
         .bible-text{background:#f8f9fa;padding:16px;border-radius:12px;line-height:1.8;max-height:400px;overflow-y:auto}
         .sermon-item{background:white;border-radius:20px;padding:16px;margin-bottom:12px;cursor:pointer;display:flex;gap:15px;align-items:center}
         .sermon-icon{width:50px;height:50px;background:#D2691E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:25px}
-        .share-btn{background:#25D366;padding:10px;border-radius:30px;text-align:center;margin-top:10px;cursor:pointer}
-        .reflection-box{background:#fff0e6;padding:20px;border-radius:12px;margin-top:16px}
-        .verse-num{color:#D2691E;font-weight:bold;margin-right:8px}
-        .popup{position:fixed;bottom:80px;right:20px;background:linear-gradient(135deg,#8B4513,#D2691E);color:white;border-radius:20px;padding:16px;max-width:280px;z-index:200;animation:slideIn 0.5s}
-        @keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+        .share{background:#25D366;padding:10px;border-radius:30px;text-align:center;margin-top:10px;cursor:pointer}
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🙏 Soul Rescuers Ministry International</h1>
+        <img src="Weixin_Image_20260326124503_1041_69-removebg-preview.png" alt="Logo">
+        <h1>Soul Rescuers Ministry International</h1>
         <p>Faith Forward • Daily Devotion & Bible Study</p>
     </div>
 
     <div class="content">
         <div id="homePage" class="page active">
-            <div class="card" style="text-align:center;background:linear-gradient(135deg,#fff5eb,#ffe8d9)">
+            <div class="card">
                 <h3>✨ What's on your mind?</h3>
-                <textarea id="searchInput" rows="3" placeholder="Type faith, love, prayer, peace, hope, forgiveness..."></textarea>
-                <button id="searchBtn">📖 Get Biblical Answer</button>
+                <textarea id="searchInput" rows="2" placeholder="Type faith, love, prayer, peace..."></textarea>
+                <button onclick="searchTopic()">Get Answer</button>
             </div>
             <div id="answerArea" class="card" style="display:none"></div>
-            <div><h3>📜 History</h3><div id="historyArea"></div></div>
+            <div id="historyArea"></div>
         </div>
 
         <div id="devotionalPage" class="page">
             <div id="devotionalContent"></div>
-            <div style="display:flex;gap:12px;margin-top:16px">
-                <button id="prevDev" style="background:#e9ecef;color:#333">← Previous</button>
-                <button id="nextDev">Next →</button>
+            <div style="display:flex;gap:10px;margin-top:10px">
+                <button id="prevBtn" style="background:#ccc;color:#333">← Previous</button>
+                <button id="nextBtn">Next →</button>
             </div>
-            <div class="share-btn" onclick="shareDevotional()">📱 Share Devotional</div>
+            <div class="share" onclick="shareDevotional()">📱 Share Devotional</div>
         </div>
 
         <div id="biblePage" class="page">
             <h2>📖 Holy Bible</h2>
             <div class="card">
-                <div style="display:flex;gap:12px;margin-bottom:16px">
-                    <button id="otBtn" onclick="selectTestament('ot')" style="margin-top:0">Old Testament</button>
-                    <button id="ntBtn" onclick="selectTestament('nt')" style="margin-top:0">New Testament</button>
+                <div style="display:flex;gap:10px;margin-bottom:10px">
+                    <button id="otBtn" onclick="loadTestament('ot')" style="margin-top:0">Old Testament</button>
+                    <button id="ntBtn" onclick="loadTestament('nt')" style="margin-top:0">New Testament</button>
                 </div>
                 <select id="bookSelect"></select>
                 <select id="chapterSelect"></select>
                 <div id="bibleText" class="bible-text">Select a book and chapter</div>
-                <div class="share-btn" onclick="shareBible()">📱 Share Chapter</div>
+                <div class="share" onclick="shareBible()">📱 Share Chapter</div>
             </div>
         </div>
 
@@ -78,63 +72,50 @@
     </div>
 
     <div class="nav">
-        <button class="nav-btn active" onclick="showPage('home')"><span>✨</span><br>For You</button>
-        <button class="nav-btn" onclick="showPage('devotional')"><span>📖</span><br>Devotional</button>
-        <button class="nav-btn" onclick="showPage('bible')"><span>📚</span><br>Bible</button>
-        <button class="nav-btn" onclick="showPage('sermons')"><span>🎧</span><br>Sermons</button>
+        <button id="navHome" class="active" onclick="showPage('home')">✨ Home</button>
+        <button id="navDev" onclick="showPage('devotional')">📖 Devotional</button>
+        <button id="navBible" onclick="showPage('bible')">📚 Bible</button>
+        <button id="navSermons" onclick="showPage('sermons')">🎧 Sermons</button>
     </div>
 
     <script>
         const oldBooks = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi"];
         const newBooks = ["Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
-        const chapters = {"Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,"1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,"Nehemiah":13,"Esther":10,"Job":42,"Psalms":150,"Proverbs":31,"Ecclesiastes":12,"Song of Solomon":8,"Isaiah":66,"Jeremiah":52,"Lamentations":5,"Ezekiel":48,"Daniel":12,"Hosea":14,"Joel":3,"Amos":9,"Obadiah":1,"Jonah":4,"Micah":7,"Nahum":3,"Habakkuk":3,"Zephaniah":3,"Haggai":2,"Zechariah":14,"Malachi":4,"Matthew":28,"Mark":16,"Luke":24,"John":21,"Acts":28,"Romans":16,"1 Corinthians":16,"2 Corinthians":13,"Galatians":6,"Ephesians":6,"Philippians":4,"Colossians":4,"1 Thessalonians":5,"2 Thessalonians":3,"1 Timothy":6,"2 Timothy":4,"Titus":3,"Philemon":1,"Hebrews":13,"James":5,"1 Peter":5,"2 Peter":3,"1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22};
+        const chapters = {Genesis:50,Exodus:40,Leviticus:27,Numbers:36,Deuteronomy:34,Joshua:24,Judges:21,Ruth:4,"1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,Ezra:10,Nehemiah:13,Esther:10,Job:42,Psalms:150,Proverbs:31,Ecclesiastes:12,"Song of Solomon":8,Isaiah:66,Jeremiah:52,Lamentations:5,Ezekiel:48,Daniel:12,Hosea:14,Joel:3,Amos:9,Obadiah:1,Jonah:4,Micah:7,Nahum:3,Habakkuk:3,Zephaniah:3,Haggai:2,Zechariah:14,Malachi:4,Matthew:28,Mark:16,Luke:24,John:21,Acts:28,Romans:16,"1 Corinthians":16,"2 Corinthians":13,Galatians:6,Ephesians:6,Philippians:4,Colossians:4,"1 Thessalonians":5,"2 Thessalonians":3,"1 Timothy":6,"2 Timothy":4,Titus:3,Philemon:1,Hebrews:13,James:5,"1 Peter":5,"2 Peter":3,"1 John":5,"2 John":1,"3 John":1,Jude:1,Revelation:22};
 
         let currentTestament = 'ot';
-        let currentBook = '';
-        let currentChapter = 1;
-        let devotionalIndex = 0;
+        let currentDev = 0;
         let searchHistory = [];
 
         const devotionals = [
-            {title:"Walking by Faith", verse:"2 Corinthians 5:7", text:"For we live by faith, not by sight.", explanation:"Faith is trusting God completely. Abraham left his homeland without knowing where he was going. Moses stood at the Red Sea with no way out. Peter walked on water until he looked at the waves. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus.", reflection:"What area of your life are you trying to control instead of trusting God?", prayer:"Lord, increase my faith. Help me to trust You even when I cannot see the outcome. Amen."},
-            {title:"The Peace of God", verse:"Philippians 4:6-7", text:"Do not be anxious about anything, but pray about everything.", explanation:"Anxiety is a common struggle, but God offers His peace. This peace is not dependent on circumstances. It is the presence of Christ in the midst of storms. When we bring our worries to God in prayer, His peace guards our hearts.", reflection:"What is causing you anxiety today? Have you brought it to God?", prayer:"Lord Jesus, let Your peace guard my heart and mind. Amen."},
-            {title:"Love One Another", verse:"1 John 4:7-8", text:"Let us love one another, for love comes from God.", explanation:"Love is the essence of who God is. When we love, we reflect God's nature. This love is unconditional, sacrificial, and transformative. It loves when not deserved and forgives when forgiveness is not earned.", reflection:"Who in your life is difficult to love?", prayer:"Father, fill me with Your love so that I can love others as You have loved me. Amen."}
+            {title:"Walking by Faith", verse:"2 Cor 5:7", text:"We live by faith, not by sight", explanation:"Faith is trusting God completely. Abraham left his homeland. Moses stood at the Red Sea. Peter walked on water. Faith is choosing to keep our eyes on Jesus.", prayer:"Lord, increase my faith. Amen."},
+            {title:"Peace of God", verse:"John 14:27", text:"My peace I give you", explanation:"God's peace is not dependent on circumstances. It is the presence of Christ in the midst of storms.", prayer:"Lord, let Your peace guard my heart. Amen."},
+            {title:"Love One Another", verse:"1 John 4:7", text:"Love comes from God", explanation:"Love is the essence of God. When we love, we reflect His nature. Love is unconditional and sacrificial.", prayer:"Father, fill me with Your love. Amen."}
         ];
 
-        const sermons = [
-            {title:"The Power of Prayer", icon:"🙏", audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", scripture:"Philippians 4:6-7", text:"Prayer is a lifeline to God. Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God will guard your hearts. Prayer aligns our hearts with God's will, brings peace in chaos, and moves the hand of God."},
-            {title:"Walking in Faith", icon:"👣", audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", scripture:"2 Corinthians 5:7", text:"For we live by faith, not by sight. Faith is confidence in what we hope for. Abraham left his homeland without knowing where he was going. Peter walked on water as long as he kept his eyes on Jesus. Walking by faith is a daily decision to trust God when the path is unclear."},
-            {title:"Faith That Moves Mountains", icon:"⛰️", audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", scripture:"Matthew 17:20", text:"If you have faith as small as a mustard seed, you can say to this mountain, 'Move,' and it will move. It's not the size of your faith—it's the object of your faith. Speak to your mountain and refuse to be moved by circumstances."},
-            {title:"Living with Purpose", icon:"🎯", audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", scripture:"Ephesians 2:10", text:"For we are God's handiwork, created to do good works. You are God's masterpiece. Your life matters. Your purpose is real."}
+        const sermonsList = [
+            {title:"The Power of Prayer", icon:"🙏", text:"Prayer is a lifeline to God. Do not be anxious, but pray about everything. Prayer aligns our hearts with God's will and brings peace."},
+            {title:"Walking in Faith", icon:"👣", text:"We live by faith, not by sight. Abraham left his homeland. Moses chose suffering. Peter walked on water. Trust God when the path is unclear."},
+            {title:"Faith That Moves Mountains", icon:"⛰️", text:"Faith as small as a mustard seed can move mountains. It's not the size of your faith—it's the object of your faith."},
+            {title:"Living with Purpose", icon:"🎯", text:"You are God's handiwork, created for good works. Your life matters. Your purpose is real."}
         ];
-
-        function getAnswer(topic) {
-            const t = topic.toLowerCase();
-            if(t.includes('faith')) return `📖 FAITH\n\n"Now faith is confidence in what we hope for." — Hebrews 11:1\n\nFaith is trusting God completely. Abraham left his homeland without knowing where he was going. Moses stood at the Red Sea with no way out. Peter walked on water until he looked at the waves. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus.\n\n🙏 Prayer: Lord, increase my faith. Amen.`;
-            if(t.includes('love')) return `📖 LOVE\n\n"Love is patient, love is kind." — 1 Corinthians 13:4\n\nLove is the essence of who God is. When we love, we reflect God's nature. This love is unconditional, sacrificial, and transformative.\n\n🙏 Prayer: Father, fill me with Your love. Amen.`;
-            if(t.includes('prayer')) return `📖 PRAYER\n\n"Do not be anxious about anything, but pray about everything." — Philippians 4:6\n\nPrayer is our direct communication with God. The disciples asked Jesus, "Lord, teach us to pray."\n\n🙏 Prayer: Lord, teach me to pray. Amen.`;
-            if(t.includes('peace')) return `📖 PEACE\n\n"Peace I leave with you; my peace I give you." — John 14:27\n\nThis peace is not dependent on circumstances. It is the presence of Christ in the midst of storms.\n\n🙏 Prayer: Lord, let Your peace guard my heart. Amen.`;
-            if(t.includes('hope')) return `📖 HOPE\n\n"We have this hope as an anchor for the soul." — Hebrews 6:19\n\nHope is confident expectation in God's promises.\n\n🙏 Prayer: Lord, fill me with hope. Amen.`;
-            if(t.includes('forgive')) return `📖 FORGIVENESS\n\n"Forgive as the Lord forgave you." — Colossians 3:13\n\nForgiveness releases the debt you feel others owe you.\n\n🙏 Prayer: Father, help me to forgive. Amen.`;
-            return `📖 GOD'S WORD\n\n"Your word is a lamp to my feet." — Psalm 119:105\n\nTake time to meditate on God's Word today. Ask the Holy Spirit to give you understanding.\n\n🙏 Prayer: Lord, open my eyes to see wonderful things in Your Word. Amen.`;
-        }
 
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(page + 'Page').classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach((btn, i) => {
-                btn.classList.toggle('active', ['home','devotional','bible','sermons'][i] === page);
-            });
-            if(page === 'bible') fetchBibleVerse();
+            document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
+            if(page === 'home') document.getElementById('navHome').classList.add('active');
+            if(page === 'devotional') document.getElementById('navDev').classList.add('active');
+            if(page === 'bible') { document.getElementById('navBible').classList.add('active'); fetchBibleVerse(); }
+            if(page === 'sermons') document.getElementById('navSermons').classList.add('active');
         }
 
-        function selectTestament(testament) {
+        function loadTestament(testament) {
             currentTestament = testament;
             const books = testament === 'ot' ? oldBooks : newBooks;
             const select = document.getElementById('bookSelect');
             select.innerHTML = '';
             books.forEach(b => { let opt = document.createElement('option'); opt.value = b; opt.textContent = b; select.appendChild(opt); });
-            currentBook = books[0];
             updateChapterSelect();
             fetchBibleVerse();
             document.getElementById('otBtn').style.background = testament === 'ot' ? '#D2691E' : '#e9ecef';
@@ -154,8 +135,6 @@
         async function fetchBibleVerse() {
             const book = document.getElementById('bookSelect').value;
             const chapter = document.getElementById('chapterSelect').value;
-            currentBook = book;
-            currentChapter = chapter;
             const div = document.getElementById('bibleText');
             div.innerHTML = '<div class="loading">📖 Loading...</div>';
             try {
@@ -163,108 +142,90 @@
                 const data = await res.json();
                 if(data.verses && data.verses.length > 0) {
                     let html = `<strong>${book} ${chapter}</strong><br><br>`;
-                    data.verses.forEach(v => { html += `<span class="verse-num">${v.verse}</span> ${v.text}<br>`; });
+                    data.verses.forEach(v => { html += `<span style="color:#D2691E;font-weight:bold">${v.verse}</span> ${v.text}<br>`; });
                     div.innerHTML = html;
                 } else { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 God's Word is a lamp to my feet.`; }
             } catch(e) { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Please check connection.`; }
         }
 
         function loadDevotional() {
-            const d = devotionals[devotionalIndex];
+            const d = devotionals[currentDev];
             document.getElementById('devotionalContent').innerHTML = `
-                <div class="gradient-card"><h3>✨ ${d.title}</h3><p>"${d.text}"<br>— ${d.verse}</p></div>
-                <div class="card"><p>${d.explanation}</p><div class="reflection-box"><h3>💭 Reflection</h3><p>${d.reflection}</p><h3>🙏 Prayer</h3><p>${d.prayer}</p></div></div>`;
+                <div class="gradient"><h3>✨ ${d.title}</h3><p>"${d.text}"<br>— ${d.verse}</p></div>
+                <div class="card"><p>${d.explanation}</p><div style="background:#fff0e6;padding:16px;border-radius:12px;margin-top:16px"><h3>💭 Reflection</h3><p>${d.reflection || 'Reflect on this today.'}</p><h3>🙏 Prayer</h3><p>${d.prayer}</p></div></div>`;
         }
-        function prevDevotional() { devotionalIndex = (devotionalIndex-1+devotionals.length)%devotionals.length; loadDevotional(); }
-        function nextDevotional() { devotionalIndex = (devotionalIndex+1)%devotionals.length; loadDevotional(); }
+
+        function prevDevotional() { currentDev = (currentDev-1+devotionals.length)%devotionals.length; loadDevotional(); }
+        function nextDevotional() { currentDev = (currentDev+1)%devotionals.length; loadDevotional(); }
 
         function loadSermons() {
             const container = document.getElementById('sermonsList');
             container.innerHTML = '';
-            sermons.forEach((s, i) => {
+            sermonsList.forEach((s, i) => {
                 const div = document.createElement('div');
                 div.className = 'sermon-item';
-                div.innerHTML = `<div class="sermon-icon">${s.icon}</div><div><strong>${s.title}</strong><br><small>📖 ${s.scripture}</small></div>`;
-                div.onclick = () => openSermon(i);
+                div.innerHTML = `<div class="sermon-icon">${s.icon}</div><div><strong>${s.title}</strong><br><small>Click to read</small></div>`;
+                div.onclick = () => showSermon(i);
                 container.appendChild(div);
             });
         }
 
-        function openSermon(index) {
-            const s = sermons[index];
+        function showSermon(index) {
+            const s = sermonsList[index];
             const modal = document.createElement('div');
             modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:20px';
             modal.innerHTML = `
                 <div style="max-width:600px;margin:20px auto;background:white;border-radius:20px;padding:24px;position:relative">
-                    <button onclick="this.closest('div').parentElement.remove()" style="position:absolute;top:16px;right:20px;font-size:28px;background:none;border:none">✕</button>
-                    <div style="text-align:center"><span style="font-size:70px">${s.icon}</span></div>
+                    <button onclick="this.closest('div').parentElement.remove()" style="position:absolute;top:16px;right:20px;font-size:24px;background:none;border:none">✕</button>
+                    <div style="text-align:center;font-size:60px">${s.icon}</div>
                     <h2 style="text-align:center">${s.title}</h2>
-                    <p style="text-align:center">📖 ${s.scripture}</p>
-                    <div style="line-height:1.8;margin:15px 0">${s.text}</div>
-                    <audio controls src="${s.audio}" style="width:100%"></audio>
-                    <div class="share-btn" onclick="shareSermon('${s.title}')">📱 Share Sermon</div>
+                    <div style="line-height:1.8;margin:15px 0;white-space:pre-line">${s.text}</div>
+                    <div class="share" onclick="shareSermon('${s.title}')">📱 Share Sermon</div>
                 </div>
             `;
             document.body.appendChild(modal);
         }
 
-        function shareSermon(title) { window.open(`https://wa.me/?text=${encodeURIComponent(`🎧 ${title}`)}`, '_blank'); }
-        function shareDevotional() {
-            const d = devotionals[devotionalIndex];
-            window.open(`https://wa.me/?text=${encodeURIComponent(`✨ ${d.title}\n\n${d.text}\n\n${d.explanation}\n\n🙏 ${d.prayer}`)}`, '_blank');
-        }
-        function shareBible() {
-            const text = document.getElementById('bibleText').innerText;
-            window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${currentBook} ${currentChapter}\n\n${text.substring(0,500)}`)}`, '_blank');
-        }
-
         function searchTopic() {
             const q = document.getElementById('searchInput').value.trim();
-            if(!q) { alert('Please enter a topic'); return; }
-            const answer = getAnswer(q);
-            const answerDiv = document.getElementById('answerArea');
-            answerDiv.style.display = 'block';
-            answerDiv.innerHTML = `<div style="white-space:pre-line">${answer}</div><div class="share-btn" onclick="shareAnswer('${answer.replace(/'/g, "\\'")}')">📱 Share</div>`;
-            searchHistory.unshift({question:q, answer:answer.substring(0,100), date:new Date().toLocaleDateString()});
-            localStorage.setItem('searchHistory', JSON.stringify(searchHistory.slice(-10)));
+            if(!q) { alert('Enter a topic'); return; }
+            let answer = '';
+            if(q.includes('faith')) answer = '📖 FAITH\n\nFaith is confidence in what we hope for. Abraham trusted God. Moses believed God. Peter walked on water. Faith is choosing to trust God when you cannot see the outcome. 🙏 Prayer: Lord, increase my faith.';
+            else if(q.includes('love')) answer = '📖 LOVE\n\nLove is patient and kind. God is love. When we love, we reflect God\'s nature. Love is unconditional and sacrificial. 🙏 Prayer: Father, fill me with Your love.';
+            else if(q.includes('prayer')) answer = '📖 PRAYER\n\nPray without ceasing. Prayer is our direct line to God. Bring everything to Him in prayer. 🙏 Prayer: Lord, teach me to pray.';
+            else if(q.includes('peace')) answer = '📖 PEACE\n\nPeace I leave with you. God\'s peace is not dependent on circumstances. It is the presence of Christ in the midst of storms. 🙏 Prayer: Lord, let Your peace guard my heart.';
+            else answer = `📖 GOD'S WORD\n\n"Your word is a lamp to my feet." — Psalm 119:105\n\nMeditate on God's Word today. Ask the Holy Spirit for understanding. 🙏 Prayer: Lord, open my eyes to see wonderful things in Your Word.`;
+            
+            document.getElementById('answerArea').style.display = 'block';
+            document.getElementById('answerArea').innerHTML = `<div style="white-space:pre-line">${answer}</div><div class="share" onclick="shareAnswer('${answer.replace(/'/g,"\\'")}')">📱 Share</div>`;
+            searchHistory.unshift({q:q, a:answer.substring(0,100)});
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory.slice(-5)));
             displayHistory();
             document.getElementById('searchInput').value = '';
         }
 
-        function shareAnswer(text) { window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank'); }
         function displayHistory() {
             const saved = localStorage.getItem('searchHistory');
             if(saved) searchHistory = JSON.parse(saved);
             const div = document.getElementById('historyArea');
-            if(searchHistory.length === 0) { div.innerHTML = '<p style="color:#6c757d">Your history will appear here</p>'; return; }
-            div.innerHTML = searchHistory.map(h => `<div class="card" style="padding:12px"><strong>❓ ${h.question}</strong><br><small>📖 ${h.answer}...</small></div>`).join('');
+            if(searchHistory.length === 0) { div.innerHTML = '<p>Your history will appear here</p>'; return; }
+            div.innerHTML = '<h3>📜 History</h3>' + searchHistory.map(h => `<div class="card" style="padding:12px"><strong>❓ ${h.q}</strong><br><small>📖 ${h.a}...</small></div>`).join('');
         }
 
-        document.getElementById('searchBtn').onclick = searchTopic;
-        document.getElementById('prevDev').onclick = prevDevotional;
-        document.getElementById('nextDev').onclick = nextDevotional;
+        function shareDevotional() { const d = devotionals[currentDev]; window.open(`https://wa.me/?text=${encodeURIComponent(`✨ ${d.title}\n\n${d.text}\n\n${d.explanation}\n\n🙏 ${d.prayer}`)}`, '_blank'); }
+        function shareBible() { const text = document.getElementById('bibleText').innerText; window.open(`https://wa.me/?text=${encodeURIComponent(`📖 Bible\n\n${text.substring(0,500)}`)}`, '_blank'); }
+        function shareSermon(title) { window.open(`https://wa.me/?text=${encodeURIComponent(`🎧 ${title}\n\nShare from Soul Rescuers Ministry`)}`, '_blank'); }
+        function shareAnswer(text) { window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank'); }
+
+        document.getElementById('prevBtn').onclick = prevDevotional;
+        document.getElementById('nextBtn').onclick = nextDevotional;
         document.getElementById('bookSelect').onchange = () => { updateChapterSelect(); fetchBibleVerse(); };
         document.getElementById('chapterSelect').onchange = fetchBibleVerse;
 
         loadDevotional();
         loadSermons();
         displayHistory();
-        selectTestament('ot');
-
-        setTimeout(() => {
-            const verses = [
-                {v:"Jeremiah 29:11", t:"For I know the plans I have for you, declares the Lord, plans to give you hope and a future.", m:"God has a purpose for your life!"},
-                {v:"Philippians 4:13", t:"I can do all things through Christ who strengthens me.", m:"You are not alone!"}
-            ];
-            const r = verses[Math.floor(Math.random()*verses.length)];
-            const popup = document.createElement('div');
-            popup.className = 'popup';
-            popup.innerHTML = `<button onclick="this.parentElement.remove()" style="position:absolute;top:5px;right:10px;background:none;border:none;color:white">✕</button>
-                <strong>📖 Daily Verse</strong><div style="margin:10px 0">"${r.t}"</div><div>— ${r.v}</div><div>✨ ${r.m}</div>
-                <button onclick="window.open('https://wa.me/?text=${encodeURIComponent(`📖 ${r.v}\n\n"${r.t}"`)}', '_blank')" style="margin-top:10px;padding:6px;font-size:12px">📱 Share</button>`;
-            document.body.appendChild(popup);
-            setTimeout(() => popup.remove(), 15000);
-        }, 3000);
+        loadTestament('ot');
     </script>
 </body>
 </html>
