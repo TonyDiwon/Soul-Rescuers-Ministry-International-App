@@ -105,8 +105,6 @@
         .loading { text-align: center; padding: 40px; color: #6c757d; }
         .sermon-full-text { line-height: 1.8; white-space: pre-line; max-height: 500px; overflow-y: auto; margin: 15px 0; font-size: 15px; }
         .verse-number { color: #D2691E; font-weight: bold; margin-right: 8px; }
-        
-        /* Highlight feature */
         .highlight {
             background-color: #FFD700;
             color: #2c3e50;
@@ -114,8 +112,6 @@
             padding: 2px 4px;
             cursor: pointer;
         }
-        
-        /* Daily verse popup */
         .daily-verse-popup {
             position: fixed;
             bottom: 80px;
@@ -127,7 +123,6 @@
             max-width: 300px;
             z-index: 200;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
             animation: slideIn 0.5s ease;
         }
         @keyframes slideIn {
@@ -223,12 +218,12 @@
         const chapterCounts = {"Genesis":50,"Exodus":40,"Leviticus":27,"Numbers":36,"Deuteronomy":34,"Joshua":24,"Judges":21,"Ruth":4,"1 Samuel":31,"2 Samuel":24,"1 Kings":22,"2 Kings":25,"1 Chronicles":29,"2 Chronicles":36,"Ezra":10,"Nehemiah":13,"Esther":10,"Job":42,"Psalms":150,"Proverbs":31,"Ecclesiastes":12,"Song of Solomon":8,"Isaiah":66,"Jeremiah":52,"Lamentations":5,"Ezekiel":48,"Daniel":12,"Hosea":14,"Joel":3,"Amos":9,"Obadiah":1,"Jonah":4,"Micah":7,"Nahum":3,"Habakkuk":3,"Zephaniah":3,"Haggai":2,"Zechariah":14,"Malachi":4,"Matthew":28,"Mark":16,"Luke":24,"John":21,"Acts":28,"Romans":16,"1 Corinthians":16,"2 Corinthians":13,"Galatians":6,"Ephesians":6,"Philippians":4,"Colossians":4,"1 Thessalonians":5,"2 Thessalonians":3,"1 Timothy":6,"2 Timothy":4,"Titus":3,"Philemon":1,"Hebrews":13,"James":5,"1 Peter":5,"2 Peter":3,"1 John":5,"2 John":1,"3 John":1,"Jude":1,"Revelation":22};
 
         const bibleTopics = {
-            faith: `📖 FAITH: A Deep Biblical Understanding\n\n"Now faith is confidence in what we hope for and assurance about what we do not see." — Hebrews 11:1\n\nFaith is the foundation of our relationship with God. It's not merely believing that God exists—even demons believe that (James 2:19). Faith is active trust in God's character and promises.\n\n🔍 Key Scriptures on Faith:\n• Hebrews 11:1-40 — The "Hall of Faith"\n• Romans 10:17 — "Faith comes from hearing, and hearing through the word of Christ"\n• 2 Corinthians 5:7 — "For we live by faith, not by sight"\n\n💡 How to Grow Your Faith:\n1. Spend time in God's Word daily\n2. Pray and ask God to increase your faith\n3. Remember past faithfulness\n4. Step out in obedience\n\n🙏 Prayer: Lord, increase my faith. Help me to trust You even when I cannot see the outcome. Amen.`,
-            love: `📖 LOVE: The Greatest Commandment\n\n"Love is patient, love is kind." — 1 Corinthians 13:4\n\nLove is not merely a feeling—it is the very essence of who God is. 1 John 4:8 tells us that "God is love."\n\n🔍 Key Scriptures on Love:\n• John 3:16 — God's love for the world\n• 1 John 4:19 — "We love because he first loved us"\n• Matthew 22:37-39 — Love God and love your neighbor\n\n💡 How to Love Like Jesus:\n1. Love unconditionally\n2. Love sacrificially\n3. Love actively\n\n🙏 Prayer: Father, fill me with Your love. Help me to love others as You have loved me. Amen.`,
-            prayer: `📖 PRAYER: Your Direct Line to God\n\n"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." — Philippians 4:6\n\nPrayer is our direct communication with the Creator.\n\n🔍 Key Scriptures on Prayer:\n• Matthew 6:9-13 — The Lord's Prayer\n• James 5:16 — "The prayer of a righteous person is powerful"\n• 1 Thessalonians 5:17 — "Pray without ceasing"\n\n💡 How to Deepen Your Prayer Life:\n1. Set aside time daily\n2. Pray Scripture\n3. Pray with others\n\n🙏 Prayer: Lord, teach me to pray. Help me to come to You with an open heart. Amen.`,
-            peace: `📖 PEACE: God's Gift in the Midst of Chaos\n\n"Peace I leave with you; my peace I give you." — John 14:27\n\nThis peace is not dependent on circumstances.\n\n🔍 Key Scriptures on Peace:\n• Philippians 4:6-7 — Peace that surpasses understanding\n• Isaiah 26:3 — "Perfect peace for those whose minds are steadfast"\n\n🙏 Prayer: Lord Jesus, let Your peace guard my heart and mind. Amen.`,
-            hope: `📖 HOPE: An Anchor for Your Soul\n\n"We have this hope as an anchor for the soul, firm and secure." — Hebrews 6:19\n\nHope is confident expectation in God's promises.\n\n🙏 Prayer: Lord, fill me with hope by the power of Your Spirit. Amen.`,
-            forgiveness: `📖 FORGIVENESS: Letting Go as God Let Go\n\n"Forgive as the Lord forgave you." — Colossians 3:13\n\nForgiveness releases the debt you feel others owe you.\n\n🙏 Prayer: Father, help me to forgive as You have forgiven me. Amen.`
+            faith: "📖 FAITH: A Deep Biblical Understanding\n\n'Now faith is confidence in what we hope for and assurance about what we do not see.' — Hebrews 11:1\n\nFaith is the foundation of our relationship with God. It's not merely believing that God exists—even demons believe that. Faith is active trust in God's character and promises.\n\n🔍 Key Scriptures on Faith:\n• Hebrews 11:1-40 — The Hall of Faith\n• Romans 10:17 — Faith comes from hearing God's Word\n• 2 Corinthians 5:7 — We live by faith, not by sight\n\n💡 How to Grow Your Faith:\n1. Spend time in God's Word daily\n2. Pray and ask God to increase your faith\n3. Remember how God has been faithful in the past\n4. Step out in obedience\n\n🙏 Prayer: Lord, increase my faith. Help me to trust You even when I cannot see the outcome. Amen.",
+            love: "📖 LOVE: The Greatest Commandment\n\n'Love is patient, love is kind.' — 1 Corinthians 13:4\n\nLove is not merely a feeling—it is the very essence of who God is. 1 John 4:8 tells us that 'God is love.'\n\n🔍 Key Scriptures on Love:\n• John 3:16 — God's love for the world\n• 1 John 4:19 — We love because He first loved us\n• Matthew 22:37-39 — Love God and love your neighbor\n\n💡 How to Love Like Jesus:\n1. Love unconditionally\n2. Love sacrificially\n3. Love actively through actions\n\n🙏 Prayer: Father, fill me with Your love so that I can love others as You have loved me. Amen.",
+            prayer: "📖 PRAYER: Your Direct Line to God\n\n'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.' — Philippians 4:6\n\nPrayer is our direct communication with the Creator.\n\n🔍 Key Scriptures on Prayer:\n• Matthew 6:9-13 — The Lord's Prayer\n• James 5:16 — The prayer of a righteous person is powerful\n• 1 Thessalonians 5:17 — Pray without ceasing\n\n💡 How to Deepen Your Prayer Life:\n1. Set aside time daily\n2. Pray Scripture\n3. Pray with others\n\n🙏 Prayer: Lord, teach me to pray. Help me to come to You with an open heart. Amen.",
+            peace: "📖 PEACE: God's Gift in the Midst of Chaos\n\n'Peace I leave with you; my peace I give you.' — John 14:27\n\nThis peace is not dependent on circumstances.\n\n🔍 Key Scriptures on Peace:\n• Philippians 4:6-7 — Peace that surpasses understanding\n• Isaiah 26:3 — Perfect peace for those whose minds are steadfast\n\n🙏 Prayer: Lord Jesus, let Your peace guard my heart and mind. Amen.",
+            hope: "📖 HOPE: An Anchor for Your Soul\n\n'We have this hope as an anchor for the soul, firm and secure.' — Hebrews 6:19\n\nHope is confident expectation in God's promises.\n\n🙏 Prayer: Lord, fill me with hope by the power of Your Spirit. Amen.",
+            forgiveness: "📖 FORGIVENESS: Letting Go as God Let Go\n\n'Forgive as the Lord forgave you.' — Colossians 3:13\n\nForgiveness releases the debt you feel others owe you.\n\n🙏 Prayer: Father, help me to forgive as You have forgiven me. Amen."
         };
 
         function getDetailedAnswer(question) {
@@ -239,7 +234,7 @@
             if(q.includes('peace')) return bibleTopics.peace;
             if(q.includes('hope')) return bibleTopics.hope;
             if(q.includes('forgive')) return bibleTopics.forgiveness;
-            return `📖 BIBLICAL INSIGHT: "${question}"\n\n"Your word is a lamp to my feet and a light to my path." — Psalm 119:105\n\nTake time to meditate on God's Word today. Ask the Holy Spirit to give you understanding.\n\n🙏 Prayer: Lord, open my eyes to see wonderful things in Your Word. Amen.`;
+            return "📖 BIBLICAL INSIGHT\n\n'Your word is a lamp to my feet and a light to my path.' — Psalm 119:105\n\nTake time to meditate on God's Word today. Ask the Holy Spirit to give you understanding.\n\n🙏 Prayer: Lord, open my eyes to see wonderful things in Your Word. Amen.";
         }
 
         const sermons = [
@@ -250,18 +245,9 @@
         ];
 
         const devotionals = [
-            {title:"Walking by Faith", verse:"2 Corinthians 5:7", text:"For we live by faith, not by sight.",
-            explanation:`Faith is the very foundation of our walk with God. It is not merely believing that God exists—even demons believe that. Faith is trusting God so completely that His promises become more real to us than our circumstances.\n\nThink of Abraham: God called him to leave his homeland and go to a place he had never seen. He went, even though he did not know where he was going. Abraham didn't have a map or a timeline—he only had God's word. And that was enough.\n\nThink of Moses: He stood at the edge of the Red Sea with Pharaoh's army behind him and water before him. Human reasoning said, "You're trapped." But faith said, "Stand still and see the salvation of the Lord."\n\nThink of Peter: He stepped out of the boat at Jesus' command. As long as he kept his eyes on Jesus, he walked on water. Faith is not the absence of fear—it's choosing to keep our eyes on Jesus despite the fear.`,
-            reflection:"What area of your life are you trying to control instead of trusting God?",
-            prayer:"Heavenly Father, increase my faith. Help me to trust You even when I cannot see the outcome. Give me courage to take the next step of obedience. In Jesus' name, Amen."},
-            {title:"The Peace of God", verse:"Philippians 4:6-7", text:"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
-            explanation:`Anxiety is one of the most common struggles of the human heart. We worry about our finances, our health, our children, our future. In these moments, God's Word offers us something better—His peace.\n\nThis peace is not dependent on our circumstances. It is not the absence of storms, but the presence of Christ in the midst of them. Jesus said, "Peace I leave with you; my peace I give you. I do not give to you as the world gives" (John 14:27).\n\nWhen we bring our worries to God in prayer, something supernatural happens. His peace acts as a guard around our hearts and minds.`,
-            reflection:"What is causing you anxiety today? Have you brought it to God in prayer?",
-            prayer:"Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. When my heart is troubled, remind me that You are with me. Let Your peace guard my heart and mind. Amen."},
-            {title:"Love One Another", verse:"1 John 4:7-8", text:"Dear friends, let us love one another, for love comes from God.",
-            explanation:`Love is not merely a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world.\n\nThe apostle John writes, "Dear friends, let us love one another, for love comes from God." Love originates in God. Before we ever loved Him, He loved us.\n\nThis love is not the conditional, performance-based love the world offers. It is agape love—unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.`,
-            reflection:"Who in your life is difficult to love? How can you show them God's love today?",
-            prayer:"Father, You are love. Fill me with Your love so that I can love others as You have loved me. Let Your love flow through me to those around me. In Jesus' name, Amen."}
+            {title:"Walking by Faith", verse:"2 Corinthians 5:7", text:"For we live by faith, not by sight.", explanation:"Faith is the very foundation of our walk with God. It is not merely believing that God exists—even demons believe that. Faith is trusting God so completely that His promises become more real to us than our circumstances.\n\nThink of Abraham: God called him to leave his homeland and go to a place he had never seen. He went, even though he did not know where he was going.\n\nThink of Moses: He stood at the edge of the Red Sea with Pharaoh's army behind him. Human reasoning said 'You're trapped.' But faith said 'Stand still and see the salvation of the Lord.'\n\nThink of Peter: He stepped out of the boat at Jesus' command. As long as he kept his eyes on Jesus, he walked on water.", reflection:"What area of your life are you trying to control instead of trusting God?", prayer:"Heavenly Father, increase my faith. Help me to trust You even when I cannot see the outcome. In Jesus' name, Amen."},
+            {title:"The Peace of God", verse:"Philippians 4:6-7", text:"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.", explanation:"Anxiety is a common struggle, but God offers us something better—His peace. This peace is not dependent on our circumstances. It is not the absence of storms, but the presence of Christ in the midst of them. Jesus said, 'Peace I leave with you; my peace I give you.' When we bring our worries to God in prayer, His peace guards our hearts and minds.", reflection:"What is causing you anxiety today? Have you brought it to God in prayer?", prayer:"Lord Jesus, You said 'Peace I leave with you.' Today I receive that peace. Let Your peace guard my heart and mind. Amen."},
+            {title:"Love One Another", verse:"1 John 4:7-8", text:"Dear friends, let us love one another, for love comes from God.", explanation:"Love is not merely a feeling—it is the very essence of who God is. When we love, we reflect God's nature to the world. This love is unconditional, sacrificial, and transformative. It loves when it's not deserved. It gives when nothing is given back. It forgives when forgiveness is not earned.", reflection:"Who in your life is difficult to love? How can you show them God's love today?", prayer:"Father, You are love. Fill me with Your love so that I can love others as You have loved me. In Jesus' name, Amen."}
         ];
 
         let currentDevotional = 0;
@@ -307,7 +293,7 @@
             currentBook = book;
             currentChapter = chapter;
             const div = document.getElementById('bible-text');
-            div.innerHTML = '<div class="loading">📖 Loading God\'s Word...</div>';
+            div.innerHTML = '<div class="loading">📖 Loading...</div>';
             try {
                 const res = await fetch(`https://bible-api.com/${encodeURIComponent(book)}+${chapter}`);
                 const data = await res.json();
@@ -315,8 +301,8 @@
                     let html = `<strong>${book} ${chapter}</strong><br><br>`;
                     data.verses.forEach(v => { html += `<span class="verse-number">${v.verse}</span> ${v.text}<br>`; });
                     div.innerHTML = html;
-                } else { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 "Your word is a lamp to my feet." — Psalm 119:105`; }
-            } catch(e) { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Please check your connection.`; }
+                } else { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 God's Word is a lamp to my feet.`; }
+            } catch(e) { div.innerHTML = `<strong>${book} ${chapter}</strong><br><br>📖 Please check connection.`; }
         }
 
         function loadDevotional() {
@@ -382,7 +368,6 @@
                 localStorage.setItem('devotional_history', JSON.stringify(history.slice(-10)));
                 displayHistory();
                 document.getElementById('user-question').value = '';
-                enableTextHighlighting();
             }, 500);
         }
 
@@ -394,26 +379,6 @@
             const div = document.getElementById('history-list');
             if(history.length === 0) { div.innerHTML = '<p style="color:#6c757d; text-align:center;">Your devotional history will appear here</p>'; return; }
             div.innerHTML = history.map(h => `<div class="card" style="padding:12px;"><strong>❓ ${h.question}</strong><br><small>📖 ${h.answer}...</small></div>`).join('');
-        }
-
-        function enableTextHighlighting() {
-            const textElements = document.querySelectorAll('.bible-text, .sermon-full-text, .card p, .search-result');
-            textElements.forEach(el => {
-                el.style.userSelect = 'text';
-                el.addEventListener('mouseup', function() {
-                    const selection = window.getSelection();
-                    const selectedText = selection.toString().trim();
-                    if(selectedText.length > 0) {
-                        const range = selection.getRangeAt(0);
-                        const span = document.createElement('span');
-                        span.className = 'highlight';
-                        span.title = 'Click to copy';
-                        span.onclick = function() { navigator.clipboard.writeText(selectedText); alert('Text copied!'); };
-                        try { range.surroundContents(span); } catch(e) {}
-                        selection.removeAllRanges();
-                    }
-                });
-            });
         }
 
         // Daily verse popup
@@ -437,4 +402,37 @@
                 <div style="font-size: 12px;">— ${v.verse}</div>
                 <div style="font-size: 12px; margin-top: 8px;">✨ ${v.message}</div>
                 <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <button onclick="shareVerse('${v.verse}', '${v.text.replace(/'/g, "\\'")}')" style="margin:0; padding:6px; font-size:12px;">📱
+                    <button onclick="shareVerse('${v.verse}', '${v.text.replace(/'/g, "\\'")}')" style="margin:0; padding:6px; font-size:12px;">📱 Share</button>
+                    <button onclick="copyVerse('${v.verse}', '${v.text.replace(/'/g, "\\'")}')" style="margin:0; padding:6px; font-size:12px; background:#6c757d;">📋 Copy</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            setTimeout(() => { if(popup.parentElement) popup.remove(); }, 15000);
+        }
+        
+        function shareVerse(verse, text) { window.open(`https://wa.me/?text=${encodeURIComponent(`📖 ${verse}\n\n"${text}"\n\nShare from Soul Rescuers Ministry App`)}`, '_blank'); }
+        function copyVerse(verse, text) { navigator.clipboard.writeText(`📖 ${verse}\n\n"${text}"`); alert('Verse copied!'); }
+
+        document.getElementById('get-devotional-btn').onclick = generateDevotional;
+        document.getElementById('prev-devotional').onclick = prevDevotional;
+        document.getElementById('next-devotional').onclick = nextDevotional;
+        document.getElementById('book-select').onchange = () => { updateChapterSelect(); fetchBibleVerse(); };
+        document.getElementById('chapter-select').onchange = fetchBibleVerse;
+        
+        loadDevotional();
+        loadSermons();
+        displayHistory();
+        selectTestament('ot');
+        
+        // Show daily verse after 3 seconds
+        setTimeout(() => {
+            const today = new Date().toDateString();
+            const lastSeen = localStorage.getItem('daily_verse_date');
+            if(lastSeen !== today) {
+                showDailyVersePopup();
+                localStorage.setItem('daily_verse_date', today);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
